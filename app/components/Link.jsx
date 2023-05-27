@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const CustomLink = ({ path, style, content }) => {
   return (
-    <Link href={path} className={style}>
+    <Link className={style} href={path}>
       {content}
     </Link>
   )

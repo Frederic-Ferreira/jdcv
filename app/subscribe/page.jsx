@@ -142,6 +142,7 @@ function Subscribe({}) {
             <div className="flex items-center col-span-2 mt-6">
               <input
                 type="checkbox"
+                required
                 className="h-4 mr-4 hover:cursor-pointer"
               />
               <label className="text-sm text-[#B1AFAF]">

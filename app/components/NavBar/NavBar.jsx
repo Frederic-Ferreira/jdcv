@@ -29,7 +29,7 @@ const navLinks = [
 
 export default function NavBar() {
   return (
-    <div className="nav flex fixed top-0 px-10 items-center font-lexend justify-between w-full bg-white backdrop-blur-md bg-opacity-30">
+    <div className="nav flex fixed top-0 px-10 items-center font-lexend justify-between w-full bg-white backdrop-blur-md bg-opacity-50 z-50">
       <Link
         content={
           <Image

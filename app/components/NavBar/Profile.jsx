@@ -1,18 +1,20 @@
+"use client"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
+import userStore from "@config/store"
 
 const profileLinks = [
   {
     icon: "/images/nav/subscribe.svg",
     name: "Inscription",
-    path: "/",
+    path: "/subscribe",
   },
   {
     icon: "/images/nav/deco.svg",
     name: "Connexion",
-    path: "/",
+    path: "/connexion",
   },
   {},
   {
@@ -30,13 +32,18 @@ const profileLinks = [
 function Profile(props) {
   const [showMenu, setShowMenu] = useState(false)
   const profileRef = useRef(null)
+  const { user } = userStore()
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (
         profileRef.current &&
-        !profileRef.current.contains(event.target) &&
-        !event.target.closest(".menu")
+        !event.target.classList.contains("profile") &&
+        (!event.target.closest(".menu") || event.target.closest(".link"))
       ) {
         setShowMenu(false)
       }
@@ -52,7 +59,7 @@ function Profile(props) {
   return (
     <div ref={profileRef} className="relative">
       <Image
-        className="hover:cursor-pointer"
+        className="profile hover:cursor-pointer"
         onClick={() => setShowMenu(!showMenu)}
         src="/images/nav/default-profile.svg"
         height="50"
@@ -65,7 +72,7 @@ function Profile(props) {
             return i !== 2 ? (
               <div className="flex items-center gap-4" key={uid()}>
                 <Image src={link.icon} height="20" width="20" alt={link.name} />
-                <div className="group transition duration-300">
+                <div className="link group transition duration-300">
                   <Link path={link.path} content={link.name} />
                   <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-[#EE7526]" />
                 </div>

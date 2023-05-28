@@ -1,4 +1,3 @@
-"use client"
 import Image from "next/image"
 import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
@@ -30,7 +29,7 @@ const navLinks = [
 
 export default function NavBar() {
   return (
-    <div className="flex px-10 items-center font-lexend justify-between w-full backdrop-blur bg-white opacity-80">
+    <div className="nav flex fixed top-0 px-10 items-center font-lexend justify-between w-full bg-white backdrop-blur-md bg-opacity-30">
       <Link
         content={
           <Image

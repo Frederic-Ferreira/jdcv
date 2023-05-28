@@ -2,8 +2,8 @@ import Image from "next/image"
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen font-lexend font-light flex-col items-center justify-between p-24">
-      <p>Hello world</p>
+    <main className="home min-h-screen font-lexend font-light p-24">
+      <section className="presentation flex flex-col gap-10 h-full"></section>
     </main>
   )
 }

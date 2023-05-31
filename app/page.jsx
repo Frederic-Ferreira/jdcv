@@ -5,7 +5,7 @@ import SearchBar from "@app/components/SearchBar/SearchBar"
 export default function Home() {
   return (
     <main className="home min-h-screen font-lexend text-white font-light">
-      <section className="presentation flex flex-col gap-10 h-screen">
+      <section className="presentation flex flex-col gap-10 h-full">
         <div className="flex w-full px-20 pt-20 justify-around">
           <div className="flex max-w-[50%] flex-col gap-5 justify-center text-lexend text-white">
             <h1 className="text-5xl font-normal">

@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image"
+import { EnvironmentOutlined, SearchOutlined } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
 
 function Places() {
@@ -71,7 +72,7 @@ function Places() {
   return (
     <div
       onClick={handleShowMenu}
-      className="places flex rounded-l-lg gap-2 bg-white pl-6 pr-2 py-4 col-span-2 relative hover:cursor-pointer z-20"
+      className="places flex items-center rounded-l-lg gap-2 bg-white pl-6 pr-2 py-4 col-span-2 relative hover:cursor-pointer z-20"
     >
       <Image
         src="/images/home/searchbar/place.svg"
@@ -80,7 +81,7 @@ function Places() {
         alt="place icon"
       />
       <p
-        className="text-sm"
+        className="text-sm truncate"
         style={
           place ? { color: "#E4696D", fontWeight: "500" } : { color: "#B1AFAF" }
         }
@@ -90,7 +91,7 @@ function Places() {
       {showSearchMenu && (
         <div
           ref={menuRef}
-          className="absolute py-4 px-6 flex flex-col gap-4 top-[52px] -left-4 h-[300px] bg-white rounded-lg"
+          className="absolute shadow-lg text-lexend py-4 px-6 flex flex-col gap-4 top-[52px] -left-4 h-[300px] bg-white rounded-lg"
         >
           <div className="flex gap-2 items-center mr-2">
             <input
@@ -100,12 +101,7 @@ function Places() {
               value={search}
               onChange={(e) => handleSearch(e.target.value)}
             />
-            <Image
-              src="/images/home/searchbar/search.svg"
-              width={20}
-              height={20}
-              alt="place icon"
-            />
+            <SearchOutlined style={{ color: "#EE7526BF", fontSize: 20 }} />
           </div>
           <div className="flex flex-col gap-2 h-[80%] overflow-y-auto">
             {suggestions.length ? (
@@ -115,7 +111,12 @@ function Places() {
                   className="flex flex-col gap-1 px-2 py-1 hover:bg-[#F2F2F2] rounded-lg cursor-pointer"
                   onClick={() => handleLocationSelect(suggestion)}
                 >
-                  <p className="text-gray-500 text-sm">{suggestion.title}</p>
+                  <div className="flex items-center gap-2 h-[40px]">
+                    <EnvironmentOutlined
+                      style={{ color: "#E4696D", fontSize: 20 }}
+                    />
+                    <p className="text-gray-700 text-sm">{suggestion.title}</p>
+                  </div>
                 </div>
               ))
             ) : (

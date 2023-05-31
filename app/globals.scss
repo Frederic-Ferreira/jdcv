@@ -27,6 +27,10 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
   background: transparent linear-gradient(180deg, rgba(255, 32, 83, 0.45) 0%, rgba(94, 29, 187, 0.45) 25%, rgba(147, 100, 237, 0.45) 40%, rgba(255, 119, 30, 0.45) 66%, rgba(255, 183, 0, 0.45) 83%, rgba(226, 32, 158, 0.45) 100%) 0% 0% no-repeat padding-box;
 }
 
+.search-bar {
+  scroll-margin-top: 200px;
+}
+
 /* Date Range Picker */
 
 /* -- CALENDAR -- */

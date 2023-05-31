@@ -12,7 +12,11 @@ const SearchBar = () => {
   const handleOpenModal = () => {
     if (!showModal) {
       setShowModal(true)
-      searchBarRef.current.scrollIntoView({ behavior: "smooth" })
+      searchBarRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      })
     }
   }
 
@@ -44,7 +48,7 @@ const SearchBar = () => {
     <div
       ref={searchBarRef}
       onClick={handleOpenModal}
-      className="flex flex-col items-center search-bar relative w-full"
+      className="search-bar flex flex-col items-center search-bar relative w-full"
     >
       <div className="grid grid-cols-9 w-3/4 bg-white rounded-lg shadow-lg">
         <Places />

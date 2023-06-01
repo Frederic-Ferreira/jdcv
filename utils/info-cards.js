@@ -2,7 +2,7 @@ export const infoCards = [
   {
     src: "/images/home/infos/arrow.svg",
     alt: "icon de upload",
-    title: "Propos gratuitement ton bien à la fête",
+    title: "Propose gratuitement ton bien à la fête",
     content:
       "The same day that we receive your items, one of our numismatist will be contacting you with our No Obligation to sell offer.",
   },

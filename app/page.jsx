@@ -3,7 +3,9 @@ import Image from "next/image"
 import CustomLink from "@app/components/Link"
 import SearchBar from "@app/components/SearchBar/SearchBar"
 import InfoCard from "@app/components/InfoCard"
+import Gems from "@app/components/Gems/Gems"
 import { infoCards } from "@utils/info-cards"
+import { gems } from "@utils/gems"
 import { v4 as uid } from "uuid"
 import { DownCircleOutlined } from "@ant-design/icons"
 import { useEffect, useRef } from "react"
@@ -76,7 +78,7 @@ export default function Home() {
             ref={iconRef}
             onClick={handleIconClick}
             className="animate-bounce fixed bottom-0 right-10 hover:cursor-pointer"
-            style={{ color: "#2B2965BF", fontSize: 52 }}
+            style={{ color: "#EE7526", fontSize: 52 }}
           />
         </div>
         <div className="flex flex-col items-center gap-10">
@@ -99,7 +101,7 @@ export default function Home() {
           />
         </div>
       </section>
-      <section className="informations h-[500px] flex justify-center gap-10 relative">
+      <section className="informations h-[400px] flex justify-center gap-10 relative">
         <div className="absolute flex gap-20 items-center -top-12">
           {infoCards.map((info) => (
             <InfoCard
@@ -111,6 +113,12 @@ export default function Home() {
             />
           ))}
         </div>
+      </section>
+      <section className="flex flex-col gap-10 text-black h-full">
+        <h1 className="text-4xl tracking-wide pl-20">Juste pour la soirée</h1>
+        {gems.map((gem) => (
+          <Gems key={uid()} category={gem.category} />
+        ))}
       </section>
     </main>
   )

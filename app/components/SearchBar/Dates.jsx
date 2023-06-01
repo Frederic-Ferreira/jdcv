@@ -56,8 +56,8 @@ function Dates() {
         }
       >
         {dates.length
-          ? `Du ${moment(dates[0]).format("YYYY/MM/DD")} au
-            ${moment(dates[1]).format("YYYY/MM/DD")}`
+          ? `Du ${moment(dates[0]).format("DD/MM/YYYY")} au
+            ${moment(dates[1]).format("DD/MM/YYYY")}`
           : "Date"}
       </p>
       {showMenu && (

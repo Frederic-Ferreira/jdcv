@@ -1,6 +1,6 @@
 "use client"
 
-import { MoonLoader } from "react-spinners"
+import { ClipLoader } from "react-spinners"
 
 const Loader = () => {
   return (
@@ -13,7 +13,7 @@ const Loader = () => {
       items-center
     "
     >
-      <MoonLoader size={100} color="#EE7526" />
+      <ClipLoader size={50} color="#EE7526" />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import "./globals.scss"
 import NavBar from "@app/components/NavBar/NavBar"
+import Footer from "@app/components/Footer"
 import { Toaster } from "react-hot-toast"
 export const metadata = {
   title: "J'irai danser chez vous",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
         <NavBar />
         {children}
         <Toaster />
+        <Footer />
       </body>
     </html>
   )

@@ -114,11 +114,44 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className="flex flex-col gap-10 text-black h-full">
+      <section className="gems flex flex-col gap-10 text-black h-full pb-20">
         <h1 className="text-4xl tracking-wide pl-20">Juste pour la soirée</h1>
         {gems.map((gem) => (
           <Gems key={uid()} category={gem.category} />
         ))}
+      </section>
+      <section className="values flex flex-col items-center text-black text-center gap-10 h-full py-20">
+        <h1 className="text-4xl tracking-wide">
+          Notre mission : créer des moments de{" "}
+          <span className="gem-category font-medium">partage</span>
+        </h1>
+        <p className="text-sm text-[#707070] w-2/3">
+          Nous comprenons que mettre ton bien en location pour des soirées ou
+          événements peut être source d'inquiétude, c'est pour cela que nous
+          avons mis en place des mesures pour garantir la sécurité et la
+          satisfaction des propriétaires.
+        </p>
+        <div className="flex gap-20 items-center">
+          <Image
+            className="hover:scale-x-[-1] hover:rotate-y-180 transition duration-500 ease-in-out"
+            src="/images/home/value-1.svg"
+            width={150}
+            height={200}
+            alt="dessin d'un homme qui danse"
+          />
+          <CustomLink
+            path="/"
+            content="Nos valeurs"
+            style="py-2 text-black mr-auto px-14 border-2 border-black hover:bg-black hover:text-white text-center rounded-lg"
+          />
+          <Image
+            className="hover:scale-x-[-1] hover:rotate-y-180 transition duration-500 ease-in-out"
+            src="/images/home/value-2.svg"
+            width={150}
+            height={200}
+            alt="dessin d'une fille qui danse"
+          />
+        </div>
       </section>
     </main>
   )

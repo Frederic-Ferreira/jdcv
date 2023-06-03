@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
 import { useState, useEffect } from "react"
-import { ClipLoader } from "@node_modules/react-spinners"
+import { ClipLoader } from "react-spinners"
 
 function Map() {
   const [userLocation, setUserLocation] = useState(null)
@@ -40,8 +40,8 @@ function Map() {
   return userLocation ? (
     <MapContainer
       center={userLocation}
-      zoom={10}
-      style={{ height: "100%", width: "100%", zIndex: 0 }}
+      zoom={11}
+      style={{ height: "100%", width: "100%", zIndex: 0, borderRadius: 20 }}
     >
       <TileLayer
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAP_TOKEN}`}

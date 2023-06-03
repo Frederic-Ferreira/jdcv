@@ -27,7 +27,7 @@ function Carousel({ images }) {
     <div className="carousel col-span-3 flex w-full h-full rounded-xl overflow-hidden items-center relative">
       <LeftOutlined
         onClick={handleLeftClick}
-        className="hover:cursor-pointer font-bold text-2xl text-gray-300 absolute left-0 z-20 hover:text-white"
+        className="hover:cursor-pointer font-bold text-2xl text-gray-300 absolute left-0 z-10 hover:text-white"
       />
       <div className="flex w-full h-full overflow-x-hidden">
         <div
@@ -49,7 +49,7 @@ function Carousel({ images }) {
       </div>
       <RightOutlined
         onClick={handleRightClick}
-        className="hover:cursor-pointer text-2xl text-gray-300 absolute right-0 hover:text-white z-20"
+        className="hover:cursor-pointer text-2xl text-gray-300 absolute right-0 hover:text-white z-10"
       />
       <div className="flex justify-center mt-2 absolute bottom-2 left-[50%] -translate-x-[50%] hover:cursor-pointer">
         {images.map((_, index) => (

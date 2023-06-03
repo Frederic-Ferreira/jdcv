@@ -5,7 +5,7 @@ import People from "@app/components/SearchBar/People"
 import Button from "@app/components/Button"
 import Modal from "@app/components/Modal"
 import { useEffect, useState, useRef } from "react"
-const SearchBar = () => {
+const SearchBar = ({ barWidth }) => {
   const [showModal, setShowModal] = useState(false)
   const searchBarRef = useRef(null)
 
@@ -50,7 +50,11 @@ const SearchBar = () => {
       onClick={handleOpenModal}
       className="search-bar flex flex-col items-center search-bar relative w-full"
     >
-      <div className="grid grid-cols-9 w-3/4 bg-white rounded-lg search-bar-shadow">
+      <div
+        className={
+          "grid grid-cols-9 bg-white rounded-lg search-bar-shadow " + barWidth
+        }
+      >
         <Places />
         <Dates />
         <People />

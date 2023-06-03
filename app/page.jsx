@@ -83,7 +83,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center gap-10">
           <h1 className="text-[40px] font-light">Rechercher un lieu de fête</h1>
-          <SearchBar />
+          <SearchBar barWidth="w-3/4" />
         </div>
         <div className="flex items-center justify-center my-16">
           <CustomLink

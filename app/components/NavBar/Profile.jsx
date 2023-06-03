@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
 import userStore from "@config/store"
-import { profileLinks } from "@utils/menu-panel"
+import { profileLinks } from "@utils/infos/menu-panel"
 
 function Profile(props) {
   const [showMenu, setShowMenu] = useState(false)

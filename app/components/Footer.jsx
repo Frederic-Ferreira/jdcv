@@ -1,6 +1,6 @@
 import CustomLink from "@app/components/Link"
 import { v4 as uid } from "uuid"
-import { footer } from "@utils/footer"
+import { footer } from "@utils/infos/footer"
 
 function Footer(props) {
   return (

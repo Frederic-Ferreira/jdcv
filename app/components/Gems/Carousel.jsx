@@ -1,6 +1,6 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import ImageCard from "@app/components/Gems/ImageCard"
-import { imageCardStyles } from "@utils/image-card-style"
+import { imageCardStyles } from "@utils/infos/image-card-style"
 import { v4 as uid } from "uuid"
 import { useEffect, useState, useRef } from "react"
 

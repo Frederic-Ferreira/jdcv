@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
 import Profile from "@app/components/NavBar/Profile"
-import { navLinks } from "@utils/nav-links"
+import { navLinks } from "@utils/infos/nav-links"
 
 export default function NavBar() {
   return (

@@ -1,7 +1,7 @@
 export const navLinks = [
   {
     name: "Lieux disponibles",
-    path: "/",
+    path: "/logements",
     style: "",
   },
   {

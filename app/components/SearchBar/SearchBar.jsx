@@ -50,7 +50,7 @@ const SearchBar = () => {
       onClick={handleOpenModal}
       className="search-bar flex flex-col items-center search-bar relative w-full"
     >
-      <div className="grid grid-cols-9 w-3/4 bg-white rounded-lg shadow-lg">
+      <div className="grid grid-cols-9 w-3/4 bg-white rounded-lg search-bar-shadow">
         <Places />
         <Dates />
         <People />

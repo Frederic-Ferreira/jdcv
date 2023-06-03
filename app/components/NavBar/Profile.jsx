@@ -4,30 +4,7 @@ import Image from "next/image"
 import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
 import userStore from "@config/store"
-
-const profileLinks = [
-  {
-    icon: "/images/nav/subscribe.svg",
-    name: "Inscription",
-    path: "/subscribe",
-  },
-  {
-    icon: "/images/nav/deco.svg",
-    name: "Connexion",
-    path: "/connexion",
-  },
-  {},
-  {
-    icon: "/images/nav/info.svg",
-    name: "Besoin d'aide ?",
-    path: "/",
-  },
-  {
-    icon: "/images/nav/deco.svg",
-    name: "Deconnexion",
-    path: "/",
-  },
-]
+import { profileLinks } from "@utils/menu-panel"
 
 function Profile(props) {
   const [showMenu, setShowMenu] = useState(false)

@@ -10,10 +10,10 @@ import { ClipLoader } from "react-spinners"
 function Map() {
   const [userLocation, setUserLocation] = useState(null)
 
-  const customIcon = (text) => {
+  const customIcon = (price) => {
     return new DivIcon({
       className: "custom-icon",
-      html: `<div class="flex items-center justify-center w-10 h-5 bg-white rounded-lg search-bar-shadow text-lexend">${text}</div>`,
+      html: `<div class="flex items-center font-medium justify-center w-12 h-6 bg-white rounded-xl search-bar-shadow text-lexend text-[14px]" >${price}€</div>`,
     })
   }
 
@@ -46,7 +46,7 @@ function Map() {
       <TileLayer
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAP_TOKEN}`}
       />
-      <Marker position={[45.6739, 4.9529]} icon={customIcon("123e")}>
+      <Marker position={[45.6739, 4.9529]} icon={customIcon("123")}>
         <Popup>Hey ! I live here</Popup>
       </Marker>
     </MapContainer>

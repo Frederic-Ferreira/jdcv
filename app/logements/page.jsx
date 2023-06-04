@@ -36,7 +36,6 @@ function Housing(props) {
                 return (
                   <div key={uid()} className="flex-shrink-0">
                     <FilterOrder
-                      key={uid()}
                       filter={filter}
                       updateFilters={updateFilters}
                     />

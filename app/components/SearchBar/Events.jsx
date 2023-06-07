@@ -85,7 +85,7 @@ function Events() {
       />
       <div
         className={
-          "flex items-center gap-2 text-sm max-h-[30px] overflow-y-hidden " +
+          "flex items-center gap-2 text-sm max-h-[30px] " +
           (events.length > 0 ? "overflow-x-auto" : "truncate")
         }
         style={
@@ -98,7 +98,7 @@ function Events() {
           ? events.map((event, index) => (
               <span
                 key={uid()}
-                className="selected-event bg-gray-400 text-white rounded-xl px-2 py-1"
+                className="selected-event bg-gray-400 text-white rounded-xl px-2 py-2"
               >
                 {event}
               </span>

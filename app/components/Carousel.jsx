@@ -37,11 +37,10 @@ function Carousel({ images }) {
           }}
         >
           {images.map((image) => (
-            <Image
+            <img
               key={uid()}
               src={image.src}
-              width={250}
-              height={200}
+              style={{ width: "100% !important" }}
               alt="Photos de logement"
             />
           ))}

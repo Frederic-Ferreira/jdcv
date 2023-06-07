@@ -2,10 +2,12 @@
 import Image from "next/image"
 import Button from "@app/components/Button"
 import CustomLink from "@app/components/Link"
-
+import { aboutValues } from "@utils/infos/about-values"
+import Values from "@app/informations/components/Values"
+import { v4 as uid } from "uuid"
 function Informations(props) {
   return (
-    <div className="infos flex flex-col gap-4 tetx-lexend mt-10">
+    <div className="infos flex flex-col gap-8 tetx-lexend mt-10">
       <div className="flex gap-20 px-20">
         <div className="flex flex-col gap-20 max-w-2/3 z-20">
           <div className="flex flex-col h-[150px] relative z-20">
@@ -169,7 +171,29 @@ function Informations(props) {
           style={{ zIndex: 30 }}
         />
       </div>
-      <div className="flex flex-col gap-8 px-20"></div>
+      <div className="flex flex-col gap-12 px-20 my-10">
+        {aboutValues.map((value, i) => {
+          return i === 1 ? (
+            <Values
+              key={uid()}
+              content={value.content}
+              title={value.title}
+              style="text-right ml-auto"
+            />
+          ) : (
+            <Values key={uid()} content={value.content} title={value.title} />
+          )
+        })}
+      </div>
+      <div className="text-center text-2xl font-medium text-[#FF2053] px-32 mt-10 mb-20">
+        <h2>
+          Nous sommes ravis de vous offrir une expérience unique sur notre
+          plateforme de location. Rejoignez notre communauté et laissez-vous
+          emporter par la magie des festivités chez des propriétaires
+          passionnés. Nous sommes impatients de vous aider à créer des souvenirs
+          inoubliables et à célébrer la vie ensemble !
+        </h2>
+      </div>
     </div>
   )
 }

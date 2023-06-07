@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image"
 import { Pagination } from "@mui/material"
-import Stack from "@mui/material/Stack"
 import dynamic from "next/dynamic"
 import SearchBar from "@app/components/SearchBar/SearchBar"
 import FilterOrder from "@app/logements/components/FilterOrder"

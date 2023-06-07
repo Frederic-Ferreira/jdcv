@@ -78,7 +78,7 @@ function Events() {
       className="events flex items-center border-l border-gray-200 gap-2 bg-white pl-6 pr-2 py-2 col-span-2 relative hover:cursor-pointer z-20"
     >
       <Image
-        src="/images/home/searchbar/people.svg"
+        src="/images/home/searchbar/event.svg"
         width={20}
         height={20}
         alt="place icon"

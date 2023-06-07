@@ -42,12 +42,19 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
   background-clip: text;
   text-fill-color: transparent;
 }
+
+.infos-bg{
+  background: transparent linear-gradient(245deg, #FF2053 0%, #5E1DBB 21%, #9364ED 40%, #FF771E 61%, #FFB700 81%, #E2209E 100%) 0% 0% no-repeat padding-box;
+  opacity: 0.45;
+}
+
+
 .css-wjh20t-MuiPagination-ul{
   gap: 30px;
 }
 
 .color{
-  color: #296cce
+  color: #ffb700
 }
 /* Date Range Picker */
 

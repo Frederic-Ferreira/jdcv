@@ -87,7 +87,7 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-center my-16">
           <CustomLink
-            path="/"
+            path="/logements"
             content={"Afficher la carte"}
             icon={
               <Image

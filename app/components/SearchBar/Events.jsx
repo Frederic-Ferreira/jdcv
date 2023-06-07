@@ -85,8 +85,10 @@ function Events() {
       />
       <div
         className={
-          "flex items-center gap-2 text-sm max-h-[30px] " +
-          (events.length > 0 ? "overflow-x-auto" : "truncate")
+          "text-sm max-h-[30px] " +
+          (events.length > 0
+            ? "flex items-center gap-2 overflow-x-auto"
+            : "truncate")
         }
         style={
           events.length > 0

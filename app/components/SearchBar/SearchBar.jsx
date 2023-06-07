@@ -50,11 +50,11 @@ const SearchBar = ({ barWidth }) => {
     <div
       ref={searchBarRef}
       onClick={handleOpenModal}
-      className="search-bar flex flex-col items-center search-bar relative w-full"
+      className="search-bar flex flex-col items-center search-bar relative  w-full"
     >
       <div
         className={
-          "grid grid-cols-11 bg-white rounded-lg search-bar-shadow " + barWidth
+          "grid grid-cols-11 bg-white rounded-lg search-bar-shadow  " + barWidth
         }
       >
         <Places />
@@ -62,7 +62,7 @@ const SearchBar = ({ barWidth }) => {
         <People />
         <Events />
         <Button
-          style="flex items-center justify-center rounded-lg bg-black py-2 px-4 text-white hover:bg-opacity-80 col-span-1 truncate hover:cursor-pointer"
+          style="flex items-center justify-center text-sm rounded-lg bg-black py-2 px-4 text-white hover:bg-opacity-80 col-span-1 truncate hover:cursor-pointer"
           text="Rechercher"
         />
       </div>

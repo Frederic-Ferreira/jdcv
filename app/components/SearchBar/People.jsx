@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
 
-function Places() {
+function People() {
   const [people, setPeople] = useState(0)
   const [showSearchMenu, setShowSearchMenu] = useState(false)
   const menuRef = useRef(null)
@@ -49,7 +49,7 @@ function Places() {
         className="text-sm truncate"
         style={
           people > 0
-            ? { color: "#E4696D", fontWeight: "500" }
+            ? { color: "#FF771E", fontWeight: "500" }
             : { color: "#B1AFAF" }
         }
       >
@@ -86,4 +86,4 @@ function Places() {
   )
 }
 
-export default Places
+export default People

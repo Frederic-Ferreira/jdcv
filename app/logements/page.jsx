@@ -1,5 +1,7 @@
 "use client"
 import Image from "next/image"
+import { Pagination } from "@mui/material"
+import Stack from "@mui/material/Stack"
 import dynamic from "next/dynamic"
 import SearchBar from "@app/components/SearchBar/SearchBar"
 import FilterOrder from "@app/logements/components/FilterOrder"
@@ -78,6 +80,9 @@ function Housing(props) {
         </div>
         <div className="map h-full flex items-center justify-center col-span-3">
           <Map />
+        </div>
+        <div className="col-span-4">
+          <Pagination size="large" count={10} />
         </div>
       </section>
     </div>

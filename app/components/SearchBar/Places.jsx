@@ -83,7 +83,7 @@ function Places() {
       <p
         className="text-sm truncate"
         style={
-          place ? { color: "#E4696D", fontWeight: "500" } : { color: "#B1AFAF" }
+          place ? { color: "#FF771E", fontWeight: "500" } : { color: "#B1AFAF" }
         }
       >
         {place ? place.title : "Lieu"}

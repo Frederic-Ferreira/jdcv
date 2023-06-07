@@ -14,7 +14,7 @@ function FilterOrder({ filter, updateFilters }) {
       className={
         "flex items-center justify-center text-lexend hover:cursor-pointer border border-1 border-black rounded-xl py-2 px-4 " +
         (isActive
-          ? "bg-black text-white hover:opacity-90"
+          ? "bg-black text-white hover:opacity-80"
           : "bg-white text-black hover:bg-black hover:text-white")
       }
     >

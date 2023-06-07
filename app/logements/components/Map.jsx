@@ -51,7 +51,7 @@ function Map() {
       </Marker>
     </MapContainer>
   ) : (
-    <ClipLoader size={30} color="#EE7526" />
+    <ClipLoader size={30} color="#296CCEFF" />
   )
 }
 

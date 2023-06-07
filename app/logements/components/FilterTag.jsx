@@ -14,7 +14,7 @@ function FilterTag({ filter, updateFilters }) {
       className={
         "flex items-center justify-center text-lexend w-[200px] hover:cursor-pointer border border-[#FF771E] border-1 rounded-xl py-2 px-4 " +
         (isActive
-          ? "bg-[#FF771E] text-white hover:opacity-90"
+          ? "bg-[#FF771E] text-white hover:opacity-80"
           : "bg-white text-[#FF771E] hover:bg-[#FF771E] hover:text-white")
       }
     >

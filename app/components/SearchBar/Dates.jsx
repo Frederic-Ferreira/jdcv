@@ -51,7 +51,7 @@ function Dates() {
         className="text-sm truncate"
         style={
           dates.length
-            ? { color: "#E4696D", fontWeight: "500" }
+            ? { color: "#FF771E", fontWeight: "500" }
             : { color: "#B1AFAF" }
         }
       >

@@ -47,6 +47,15 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
   text-fill-color: transparent;
 }
 
+.gem-category-underline {
+  background: transparent linear-gradient(103deg, #FF2053 0%, #5E1DBB 28%, #9364ED 44%, #F57532 61%, #FF771E 66%, #FFB700 78%, #E2209E 100%) 0% 0% no-repeat padding-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  border-bottom: 2px solid #FF2053;
+}
+
 .infos-bg{
   background: transparent linear-gradient(245deg, #FF2053 0%, #5E1DBB 21%, #9364ED 40%, #FF771E 61%, #FFB700 81%, #E2209E 100%) 0% 0% no-repeat padding-box;
   opacity: 0.45;

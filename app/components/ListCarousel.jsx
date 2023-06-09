@@ -4,7 +4,7 @@ import { imageCardStyles } from "@utils/infos/image-card-style"
 import { v4 as uid } from "uuid"
 import { useEffect, useState, useRef } from "react"
 
-function Carousel(props) {
+function ListCarousel({ list, Card }) {
   const [pixels, setPixels] = useState(0)
   const [translate, setTranslate] = useState(0)
   const carouselContainerRef = useRef(null)
@@ -76,13 +76,8 @@ function Carousel(props) {
           }}
           className="flex gap-3"
         >
-          {imageCardStyles.map((style) => (
-            <ImageCard
-              key={uid()}
-              src={style.src}
-              category={style.category}
-              number={style.number}
-            />
+          {list.map((image) => (
+            <Card key={uid()} image={image} />
           ))}
         </div>
       </div>
@@ -94,4 +89,4 @@ function Carousel(props) {
   )
 }
 
-export default Carousel
+export default ListCarousel

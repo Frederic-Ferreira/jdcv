@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import Carousel from "@app/components/Carousel"
+import ImagesCarousel from "@app/components/ImagesCarousel"
 import truncateByWords from "@utils/functions/truncateByWords"
 function HousingCard({
   label,
@@ -14,7 +14,7 @@ function HousingCard({
 }) {
   return (
     <div className="housing-card grid grid-cols-7 gap-4 w-full">
-      <Carousel images={images} />
+      <ImagesCarousel images={images} />
       <div className="flex flex-col col-span-4 gap-2 font-light text-black">
         <div className="label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-2 opacity-70">
           {label}

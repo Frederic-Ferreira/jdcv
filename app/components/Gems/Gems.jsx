@@ -1,5 +1,8 @@
 import Image from "next/image"
-import Carousel from "@app/components/Gems/Carousel"
+import ListCarousel from "@app/components/ListCarousel"
+import ImageCard from "@app/components/Gems/ImageCard"
+import { imageCardStyles } from "@utils/infos/image-card-style"
+
 function Gems({ category }) {
   return (
     <div className="flex flex-col gap-8">
@@ -15,7 +18,7 @@ function Gems({ category }) {
           <span className="gem-category font-medium">{category}</span>
         </h1>
       </div>
-      <Carousel />
+      <ListCarousel list={imageCardStyles} Card={ImageCard} />
     </div>
   )
 }

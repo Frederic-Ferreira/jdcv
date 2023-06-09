@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from "@node_modules/@ant-design/icons"
 import { v4 as uid } from "uuid"
 import { useState } from "react"
 
-function Carousel({ images }) {
+function ImagesCarousel({ images }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const handleLeftClick = () => {
@@ -65,4 +65,4 @@ function Carousel({ images }) {
   )
 }
 
-export default Carousel
+export default ImagesCarousel

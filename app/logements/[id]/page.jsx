@@ -12,6 +12,9 @@ import {
   TeamOutlined,
 } from "@node_modules/@ant-design/icons"
 import Profile from "@app/components/Profile"
+import ListCarousel from "@app/components/ListCarousel"
+import { detailImageStyle } from "@utils/infos/detail-image-style"
+import DetailImageCard from "@app/logements/[id]/components/ImageCard"
 
 const logement = [
   "housing-1.png",
@@ -34,6 +37,19 @@ const user = {
 const currentUser = {
   id: 2,
 }
+
+const occupe = [
+  "Gobelets",
+  "Sono",
+  "Jeux de société / Puzzle",
+  "Machine à barpapapa",
+  "Wi-Fi",
+  "Jacuzzi",
+  "Barbecue",
+  "Terasse",
+]
+
+const occupetoi = ["Playlist", "Boissons", "Snacks"]
 
 function Page(props) {
   const [people, setPeople] = useState(0)
@@ -88,7 +104,7 @@ function Page(props) {
   }, [])
 
   return (
-    <div className="flex flex-col text-lexend gap-8 text-black">
+    <div className="flex flex-col text-lexend gap-8 text-black pb-10">
       <section className="header w-2/3 flex flex-col gap-2 px-20">
         <div className="flex items-center gap-20">
           <h1 className="text-xl font-medium">
@@ -162,7 +178,7 @@ function Page(props) {
           )
         })}
       </section>
-      <section className="flex gap-8 px-20 mt-10">
+      <section className="flex gap-8 px-20 mt-12">
         <div className="flex flex-col gap-8 w-2/3">
           <h2 className="gem-category-underline w-[125px] text-xl font-medium underline">
             Présentation
@@ -365,6 +381,46 @@ function Page(props) {
             alt="personnages"
           />
         </div>
+      </section>
+      <section className="flex flex-col gap-8 px-20 pb-10">
+        <h2 className="gem-category-underline w-[240px] text-xl font-medium">
+          Je m'occupe de :
+        </h2>
+        <div className="flex flex-wrap flex-col gap-4 max-h-[170px] mr-auto">
+          {occupe.map((item, index) => (
+            <div key={uid()} className="flex items-center gap-4 w-[200px]">
+              <Image
+                src="/images/housing/details/check.svg"
+                width={30}
+                height={30}
+                alt="icon check"
+              />
+              <p className="text-lg">{item}</p>
+            </div>
+          ))}
+        </div>
+        <h2 className="gem-category-underline w-[240px] text-xl font-medium">
+          Vous vous occupez de :
+        </h2>
+        <div className="flex flex-wrap flex-col gap-4 max-h-[170px] mr-auto">
+          {occupetoi.map((item, index) => (
+            <div key={uid()} className="flex items-center gap-4 w-[200px]">
+              <Image
+                src="/images/housing/details/check.svg"
+                width={30}
+                height={30}
+                alt="icon check"
+              />
+              <p className="text-lg">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="flex flex-col gap-12">
+        <h1 className="text-3xl font-medium px-20">
+          Autres pépites à proximité
+        </h1>
+        <ListCarousel list={detailImageStyle} Card={DetailImageCard} />
       </section>
     </div>
   )

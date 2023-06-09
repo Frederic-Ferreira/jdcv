@@ -77,6 +77,32 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
 .btn-orange-linear{
   background: transparent linear-gradient(78deg, #F05306 0%, #FF8E37 100%) 0% 0% no-repeat padding-box;
 }
+
+.gradient-text-1{
+  background: transparent linear-gradient(126deg, #FF2053 0%, #5E1DBB 21%, #9364ED 40%, #FF771E 61%, #FFB700 81%, #E2209E 100%) 0% 0% no-repeat padding-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.gradient-text-2{
+  background: transparent linear-gradient(130deg, #FF2053 0%, #5E1DBB 21%, #9364ED 40%, #FF771E 61%, #FFB700 81%, #E2209E 100%) 0% 0% no-repeat padding-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.gradient-text-3{
+  background: transparent linear-gradient(210deg, #FF2053 0%, #5E1DBB 21%, #9364ED 40%, #FF771E 61%, #FFB700 81%, #EB4D6F 88%, #E2209E 100%) 0% 0% no-repeat padding-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+
 /* Date Range Picker */
 
 /* -- CALENDAR -- */

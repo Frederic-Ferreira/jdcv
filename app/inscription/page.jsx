@@ -114,7 +114,7 @@ function Subscribe({}) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full bg-[#E4696D]">
+    <div className="flex flex-col justify-center items-center w-full bg-[#E4696D]">
       <h1 className="text-2xl text-white font-light mb-10">
         J'irai Danser Chez Vous te shoutaite la bienvenue !
       </h1>

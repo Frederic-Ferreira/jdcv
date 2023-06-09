@@ -12,6 +12,6 @@ export const aboutValues = [
   {
     title: "Dynamisme",
     content:
-      "Enfin, le dynamisme est au cœur de notre plateforme. Nous croyons que la fête ne se limite pas à une seule culture ou à un seul style. Nous nous efforçons de proposer une variété d'options, des soirées animées dans des appartements modernes aux fêtes traditionnelles dans des maisons historiques. Vous trouverez chez nous une multitude d'expériences festives adaptées à vos goûts et à vos envies.",
+      "Enfin, le dynamisme est au cœur de notre plateforme. Nous croyons que la fête ne se limite pas à une seule culture ou à un seul style. Nous nous efforçons de location une variété d'options, des soirées animées dans des appartements modernes aux fêtes traditionnelles dans des maisons historiques. Vous trouverez chez nous une multitude d'expériences festives adaptées à vos goûts et à vos envies.",
   },
 ]

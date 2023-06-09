@@ -178,7 +178,7 @@ function Page(props) {
           )
         })}
       </section>
-      <section className="flex gap-8 px-20 mt-12">
+      <section className="presentation-reservation flex gap-8 px-20 mt-12">
         <div className="flex flex-col gap-8 w-2/3">
           <h2 className="gem-category-underline w-[125px] text-xl font-medium underline">
             Présentation
@@ -366,7 +366,7 @@ function Page(props) {
           />
         </div>
       </section>
-      <section className="flex gap-8 px-20">
+      <section className="host flex gap-8 px-20">
         <div className="flex flex-col gap-4 w-2/3">
           <h2 className="gem-category-underline w-[240px] text-xl font-medium underline">
             Vous ferez la fête avec :
@@ -382,13 +382,13 @@ function Page(props) {
           />
         </div>
       </section>
-      <section className="flex flex-col gap-8 px-20 pb-10">
-        <h2 className="gem-category-underline w-[240px] text-xl font-medium">
+      <section className="take-care flex flex-col gap-8 px-20 pb-10">
+        <h2 className="gem-category-underline w-[180px] text-xl font-medium">
           Je m'occupe de :
         </h2>
         <div className="flex flex-wrap flex-col gap-4 max-h-[170px] mr-auto">
           {occupe.map((item, index) => (
-            <div key={uid()} className="flex items-center gap-4 w-[200px]">
+            <div key={uid()} className="flex items-center gap-4 w-[220px] mx-4">
               <Image
                 src="/images/housing/details/check.svg"
                 width={30}
@@ -416,7 +416,7 @@ function Page(props) {
           ))}
         </div>
       </section>
-      <section className="flex flex-col gap-12">
+      <section className="gems flex flex-col gap-12">
         <h1 className="text-3xl font-medium px-20">
           Autres pépites à proximité
         </h1>

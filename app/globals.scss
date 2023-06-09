@@ -73,6 +73,10 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
 .color{
   color: #ffb700
 }
+
+.btn-orange-linear{
+  background: transparent linear-gradient(78deg, #F05306 0%, #FF8E37 100%) 0% 0% no-repeat padding-box;
+}
 /* Date Range Picker */
 
 /* -- CALENDAR -- */

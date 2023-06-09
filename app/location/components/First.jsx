@@ -4,7 +4,7 @@ import CustomLink from "@app/components/Link"
 import Lottie from "@node_modules/lottie-react"
 import firstLocation from "@public/animations/first-location.json"
 
-function Home(props) {
+function First(props) {
   return (
     <div className="flex gap-8 pt-40 px-40 pb-20">
       <div className="flex flex-col gap-12 w-2/3">
@@ -32,4 +32,4 @@ function Home(props) {
   )
 }
 
-export default Home
+export default First

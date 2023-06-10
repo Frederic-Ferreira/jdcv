@@ -1,5 +1,6 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
+import { toast } from "react-hot-toast"
 import { categoryList } from "@utils/infos/category-list"
 import { v4 as uid } from "uuid"
 
@@ -54,7 +55,13 @@ function Third({ setPage }) {
         <Button
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
-          event={() => selectedCategory && setPage(4)}
+          event={() => {
+            if (selectedCategory) {
+              setPage(4)
+            } else {
+              toast.error("Sélectionne une catégorie")
+            }
+          }}
         />
       </div>
     </div>

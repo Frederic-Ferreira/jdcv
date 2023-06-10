@@ -1,5 +1,6 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
+import { toast } from "react-hot-toast"
 
 function Fourth({ setPage }) {
   const [choice, setChoice] = useState("")
@@ -60,7 +61,13 @@ function Fourth({ setPage }) {
         <Button
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
-          event={() => choice && setPage(5)}
+          event={() => {
+            if (choice) {
+              setPage(5)
+            } else {
+              toast.error("Sélectionne une option")
+            }
+          }}
         />
       </div>
     </div>

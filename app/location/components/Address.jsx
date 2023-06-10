@@ -1,9 +1,6 @@
 "use client"
 import { useState } from "react"
-import {
-  EnvironmentOutlined,
-  SearchOutlined,
-} from "@node_modules/@ant-design/icons"
+import { EnvironmentOutlined } from "@node_modules/@ant-design/icons"
 import Image from "next/image"
 
 export default function Address({ onSelect }) {
@@ -44,27 +41,24 @@ export default function Address({ onSelect }) {
     setSearch("")
   }
   return (
-    <section className="w-1/2">
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl">Adresse</h2>
-        <div className="flex items-center gap-2 relative">
-          <input
-            className="w-full border border-[#DADADA] bg-[#F8F7F7] text-black rounded-lg pl-12 pr-2 py-1 h-[50px] "
-            type="text"
-            placeholder={place ? place : ""}
-            value={search}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-          <Image
-            className="absolute left-4"
-            src="/images/home/searchbar/place.svg"
-            width={20}
-            height={20}
-            alt="logo emplacement"
-          />
-        </div>
+    <section className="w-1/2 h-full">
+      <div className="flex items-center gap-2 relative">
+        <input
+          className="w-full border border-[#DADADA] bg-[#F8F7F7] text-black rounded-lg pl-12 pr-2 py-1 h-[40px]"
+          type="text"
+          placeholder={place ? place : "Recherche"}
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        <Image
+          className="absolute left-4"
+          src="/images/home/searchbar/place.svg"
+          width={20}
+          height={20}
+          alt="logo emplacement"
+        />
       </div>
-      <div className="flex flex-col gap-2 h-[80%] overflow-y-auto mt-4">
+      <div className="flex flex-col gap-2 h-[80%] overflow-y-auto mt-2">
         {suggestions.length
           ? suggestions.map((suggestion) => (
               <div

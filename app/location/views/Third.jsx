@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast"
 import { categoryList } from "@utils/infos/category-list"
 import { v4 as uid } from "uuid"
 
-function Third({ setPage }) {
+function Third({ setPage, setCategory }) {
   const [selectedCategory, setSelectedCategory] = useState("")
 
   const updateCategory = (key) => {
@@ -57,6 +57,7 @@ function Third({ setPage }) {
           text="Continuer"
           event={() => {
             if (selectedCategory) {
+              setCategory(selectedCategory)
               setPage(4)
             } else {
               toast.error("Sélectionne une catégorie")

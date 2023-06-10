@@ -19,7 +19,6 @@ function Fifth({ setPage, onSelect }) {
       latitude,
       longitude,
     })
-    onSelect(suggestion)
   }
 
   return (
@@ -52,6 +51,7 @@ function Fifth({ setPage, onSelect }) {
           text="Continuer"
           event={() => {
             if (position) {
+              onSelect(position)
               setPage(6)
             } else {
               toast.error("Sélectionne une adresse")

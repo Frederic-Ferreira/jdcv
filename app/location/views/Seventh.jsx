@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast"
 import { equipmentList } from "@utils/infos/equipment-list"
 import { v4 as uid } from "@node_modules/uuid/wrapper.mjs"
 
-function Seventh({ setPage }) {
+function Seventh({ setPage, onSelect }) {
   const [equipments, setEquipments] = useState([])
 
   const updateEquipments = (key) => {
@@ -58,6 +58,7 @@ function Seventh({ setPage }) {
           text="Continuer"
           event={() => {
             if (equipments.length > 0) {
+              onSelect(equipments)
               setPage(8)
             } else {
               toast.error("Sélectionne au moins un équipement")

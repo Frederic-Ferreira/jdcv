@@ -17,7 +17,7 @@ export default function Map({ position }) {
   useEffect(() => {
     if (position && mapRef.current) {
       const mapInstance = mapRef.current
-      mapInstance.setView([position.latitude, position.longitude], 14)
+      mapInstance.setView([position.latitude, position.longitude], 13)
     }
   }, [position])
 

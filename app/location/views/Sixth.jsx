@@ -2,7 +2,7 @@ import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 
-function Sixth({ setPage }) {
+function Sixth({ setPage, onSelect }) {
   const [people, setPeople] = useState("")
   const [rooms, setRooms] = useState("")
 
@@ -61,6 +61,7 @@ function Sixth({ setPage }) {
                 toast.error("Les champs doivent être des nombres")
                 return
               }
+              onSelect(people, rooms)
               setPage(7)
             } else {
               toast.error("Remplis tous les champs")

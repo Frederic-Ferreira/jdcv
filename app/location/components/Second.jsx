@@ -2,7 +2,7 @@ import Button from "@app/components/Button"
 
 function Second({ setPage }) {
   return (
-    <div className="flex flex-col gap-8 py-10 px-40">
+    <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium"> Bienvenue, Prénom</h1>
       <h2 className="text-2xl">
         Propose ton logement sur notre plateforme en 3 étapes :
@@ -40,7 +40,7 @@ function Second({ setPage }) {
         </div>
       </div>
       <Button
-        style="ml-auto -mt-4 btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer"
+        style="ml-auto btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
         text="Continuer"
         event={() => setPage(3)}
       />

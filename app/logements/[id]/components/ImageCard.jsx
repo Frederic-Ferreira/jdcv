@@ -11,8 +11,10 @@ function DetailImageCard({ image }) {
           alt={image.title}
         />
       </div>
-      <div className="w-full h-1/2 flex flex-col gap-2 p-2 font-normal ">
-        <h3 className="text-sm font-medium">{image.title}</h3>
+      <div className="w-full h-1/2 flex flex-col gap-2 px-2 py-1 font-normal ">
+        <h3 className="text-sm font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
+          {image.title}
+        </h3>
         <div className="flex items-center gap-2">
           <Image
             src="/images/housing/details/place-red.svg"
@@ -22,7 +24,7 @@ function DetailImageCard({ image }) {
           />
           <p className="text-xs font-light truncate">{image.address}</p>
         </div>
-        <div className="text-center px-2 py-1 text-white text-sm rounded-lg bg-[#FF2053] w-1/3">
+        <div className="text-center p-1 text-white text-xs rounded-lg bg-[#FF2053] w-1/3">
           {image.category}
         </div>
         <div className="flex items-center gap-2">

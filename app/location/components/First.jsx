@@ -14,7 +14,7 @@ function First({ setPage }) {
         </h1>
         <div className="flex self-start flex-col gap-4 items-center">
           <Button
-            style="btn-orange-linear text-white font-medium font-medium px-10 py-2 rounded-md hover:cursor-pointer"
+            style="btn-orange-linear text-white font-medium font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
             text="Je propose mon logement"
             event={() => setPage(2)}
           />

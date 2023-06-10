@@ -1,48 +1,62 @@
 import Button from "@app/components/Button"
+import { useState } from "react"
+import { categoryList } from "@utils/infos/category-list"
+import { v4 as uid } from "uuid"
 
 function Third({ setPage }) {
+  const [selectedCategory, setSelectedCategory] = useState("")
+
+  const updateCategory = (key) => {
+    setSelectedCategory(key)
+  }
+
   return (
-    <div className="flex flex-col gap-8 py-10 px-40">
+    <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium">Étape 1</h1>
       <h2 className="text-2xl">Parle nous de ton logement</h2>
-      <p></p>
-      <div className="flex items-center gap-4">
-        <h1 className="text-8xl gradient-text-1 font-medium">1</h1>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-normal">Parle nous de ton logement</h1>
-          <p className="text-sm font-light">
-            Donne-nous quelques informations de base, par exemple indique-nous
-            où il se trouve et combien de voyageurs il peut accueillir, quels
-            services et/ou équipements tu proposerais aux invités etc...
-          </p>
-        </div>
+      <p className="font-light">
+        Au cours de cette étape, nous allons te demander quel type de logement
+        tu proposes et si les voyageurs pourront le réserver dans son
+        intégralité ou si tu ne loues qu'une partie. Nous te demanderons ensuite
+        d'indiquer son emplacement et sa capacité d'accueil.
+      </p>
+      <h4 className="text-xl">
+        Quel type de logement sera à la disposition des invités ?
+      </h4>
+      <div className="flex flex-wrap items-center gap-6">
+        {categoryList.map((category) => (
+          <div
+            key={uid()}
+            onClick={() => updateCategory(category.title)}
+            className={
+              "min-w-[200px] py-2 text-center rounded-md hover:cursor-pointer hover:bg-[" +
+              category.color +
+              "] hover:text-white"
+            }
+            style={{
+              border: `2px solid ${category.color}`,
+              backgroundColor:
+                selectedCategory === category.title ? category.color : "white",
+              color:
+                selectedCategory === category.title ? "white" : category.color,
+            }}
+          >
+            {category.title}
+          </div>
+        ))}
       </div>
-      <div className="flex items-center gap-4">
-        <h1 className="text-8xl gradient-text-2 font-medium">2</h1>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-normal">
-            Fais en sorte de te démarquer
-          </h1>
-          <p className="text-sm font-light">
-            Ajoute au moins 5 photos, un titre et une description. Nous allons
-            t'aider.
-          </p>
-        </div>
+      <div className="flex items-center mt-[100px] justify-between ">
+        <Button
+          style="text-lg font-light text-black underline hover:cursor-pointer"
+          text="Retour"
+          event={() => setPage(2)}
+        />
+        <Button
+          style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
+          text="Continuer"
+          event={() => selectedCategory && setPage(4)}
+        />
       </div>
-      <div className="flex items-center gap-4">
-        <h1 className="text-8xl gradient-text-3 font-medium">3</h1>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-normal">Termine et publie</h1>
-          <p className="text-sm font-light">
-            Fixe un prix initial et publie ton annonce.
-          </p>
-        </div>
-      </div>
-      <Button
-        style="ml-auto -mt-4 btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer"
-        text="Continuer"
-        event={() => setPage(3)}
-      />
     </div>
   )
 }

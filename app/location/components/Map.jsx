@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet-defaulticon-compatibility"
 import { useEffect, useRef, useState } from "react"
+import { ClipLoader } from "react-spinners"
 
 export default function Map({ position }) {
   const [isMounted, setIsMounted] = useState(false)
@@ -36,7 +37,9 @@ export default function Map({ position }) {
             <Marker position={[position.latitude, position.longitude]}></Marker>
           ) : null}
         </MapContainer>
-      ) : null}
+      ) : (
+        <ClipLoader size={35} color="#EE7526" />
+      )}
     </div>
   )
 }

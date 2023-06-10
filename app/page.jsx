@@ -74,11 +74,13 @@ export default function Home() {
             height={500}
             alt="characters partying"
           />
-          <DownCircleOutlined
+          <Image
+            src="/images/home/hand.svg"
+            width={35}
+            height={35}
             ref={iconRef}
             onClick={handleIconClick}
             className="animate-bounce fixed bottom-0 right-10 hover:cursor-pointer"
-            style={{ color: "#EE7526", fontSize: 52 }}
           />
         </div>
         <div className="flex flex-col items-center gap-10">

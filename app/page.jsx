@@ -76,8 +76,8 @@ export default function Home() {
           />
           <Image
             src="/images/home/hand.svg"
-            width={35}
-            height={35}
+            width={40}
+            height={40}
             ref={iconRef}
             onClick={handleIconClick}
             className="animate-bounce fixed bottom-0 right-10 hover:cursor-pointer"

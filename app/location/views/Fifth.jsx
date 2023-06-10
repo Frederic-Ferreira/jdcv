@@ -1,7 +1,4 @@
 "use client"
-import "leaflet/dist/leaflet.css"
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
-import "leaflet-defaulticon-compatibility"
 import dynamic from "next/dynamic"
 import Button from "@app/components/Button"
 import { useState } from "react"

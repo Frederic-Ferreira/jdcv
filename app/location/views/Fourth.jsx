@@ -1,3 +1,4 @@
+"use client"
 import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"

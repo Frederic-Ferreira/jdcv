@@ -8,9 +8,13 @@ import Fifth from "@app/location/views/Fifth"
 import Sixth from "@app/location/views/Sixth"
 import Seventh from "@app/location/views/Seventh"
 import Eighth from "@app/location/views/Eighth"
+import Ninth from "@app/location/views/Ninth"
+import Tenth from "@app/location/views/Tenth"
+import Eleventh from "@app/location/views/Eleventh"
+import Twelfth from "@app/location/views/Twelfth"
 
 function Page(props) {
-  const [page, setPage] = useState(8)
+  const [page, setPage] = useState(12)
   const [category, setCategory] = useState("")
   const [address, setAddress] = useState(null)
   const [rooms, setRooms] = useState(0)
@@ -34,6 +38,10 @@ function Page(props) {
       )}
       {page === 7 && <Seventh setPage={setPage} onSelect={setEquipments} />}
       {page === 8 && <Eighth setPage={setPage} onSelect={setEquipments} />}
+      {page === 9 && <Ninth setPage={setPage} />}
+      {page === 10 && <Tenth setPage={setPage} />}
+      {page === 11 && <Eleventh setPage={setPage} />}
+      {page === 12 && <Twelfth setPage={setPage} />}
     </div>
   )
 }

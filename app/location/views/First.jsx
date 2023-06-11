@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import Button from "@app/components/Button"
 import CustomLink from "@app/components/Link"

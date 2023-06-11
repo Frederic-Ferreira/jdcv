@@ -1,3 +1,4 @@
+"use client"
 import Button from "@app/components/Button"
 import { useRef, useState } from "react"
 import { toast } from "react-hot-toast"
@@ -19,17 +20,20 @@ function Eighth({ setPage, setCategory }) {
   }
 
   function handleDragOver(event) {
+    console.log("handleDragOver")
     event.preventDefault()
     event.dataTransfer.dropEffect = "copy"
   }
 
   function handleDrop(event) {
+    console.log("handleDrop", event.dataTransfer.files)
     event.preventDefault()
     const files = event.dataTransfer.files
     processFiles(files)
   }
 
   function handleFileChange(event) {
+    console.log("handleFileChange", event.target.files)
     const files = event.target.files
     processFiles(files)
   }
@@ -81,7 +85,7 @@ function Eighth({ setPage, setCategory }) {
         </div>
         <div className="flex flex-col items-center gap-4 w-1/2">
           <div
-            onClick={handleSquareClick}
+            onClick={(e) => handleSquareClick(e)}
             onDragOver={(e) => handleDragOver(e)}
             onDrop={(e) => handleDrop(e)}
             className="mt-20 w-[400px] h-[350px] flex flex-col gap-8 items-center border-2 border-[#EEEEEE] rounded-xl px-4 py-10 my-auto hover:cursor-pointer"
@@ -125,7 +129,7 @@ function Eighth({ setPage, setCategory }) {
               id="file-input"
               accept="image/*"
               style={{ display: "none" }}
-              onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e)}
               multiple
             />
           </div>

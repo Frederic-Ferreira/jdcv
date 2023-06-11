@@ -3,6 +3,7 @@ import Button from "@app/components/Button"
 import { toast } from "@node_modules/react-hot-toast"
 import ImageCard from "@app/components/ImageCard"
 import Image from "next/image"
+import { locationStore } from "@config/store"
 
 const img = {
   src: "/images/housing/details/carousel/1.png",
@@ -13,15 +14,21 @@ const img = {
   price: 250,
 }
 
-function Final({ setPage }) {
+function Final() {
+  const { setPage } = locationStore()
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium">Vérifie ton annonce</h1>
-      <div className="flex gap-8">
-        <ImageCard image={img} />
-        <div className="flex flex-col gap-4">
+      <div className="flex gap-20">
+        <div className="h-[330px] w-1/2">
+          <ImageCard image={img} />
+        </div>
+        <div className="flex flex-col gap-10">
           <h2 className="text-2xl">Confirme ton annonce</h2>
-          <div className="flex items-center gap-4">
+          <div
+            onClick={() => setPage(3)}
+            className="flex items-center gap-4 hover:bg-gray-50 hover:cursor-pointer p-4 rounded-lg"
+          >
             <Image
               src="/images/housing/location/edit.svg"
               height={35}
@@ -32,13 +39,16 @@ function Final({ setPage }) {
               <h2 className="text-xl font-medium">
                 Modifie les caractéristiques principales
               </h2>
-              <p>
+              <p className="font-light">
                 Accède au début du réglage des paramètres de ton annonce, afin
                 de pouvoir modifier les choix que tu as fais.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div
+            onClick={() => setPage(11)}
+            className="flex items-center gap-4 hover:bg-gray-50 hover:cursor-pointer p-4 rounded-lg"
+          >
             <Image
               src="/images/housing/location/calendar.svg"
               height={35}
@@ -47,17 +57,17 @@ function Final({ setPage }) {
             />
             <div className="flex flex-col gap-2">
               <h2 className="text-xl font-medium">
-                Modifie la date de disponibilité
+                Modifie le prix ou la date de disponibilité
               </h2>
-              <p>
-                Un doute sur les disponibilités de ton logement ? Modifie les à
-                partir de cette page.
+              <p className="font-light">
+                Un doute sur le prix ou les disponibilités de ton logement ?
+                Modifie les à partir de cette page.
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex items-center mt-[96px] justify-between ">
+      <div className="flex items-center mt-[72px] justify-between ">
         <Button
           style="text-lg font-light text-black underline hover:cursor-pointer"
           text="Retour"

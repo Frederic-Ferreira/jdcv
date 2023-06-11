@@ -4,9 +4,11 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { categoryList } from "@utils/infos/category-list"
 import { v4 as uid } from "uuid"
+import { locationStore } from "@config/store"
 
-function Third({ setPage, setCategory }) {
-  const [selectedCategory, setSelectedCategory] = useState("")
+function Third() {
+  const { setPage, userCategory, setUserCategory } = locationStore()
+  const [selectedCategory, setSelectedCategory] = useState(userCategory)
 
   const updateCategory = (key) => {
     setSelectedCategory(key)
@@ -58,7 +60,7 @@ function Third({ setPage, setCategory }) {
           text="Continuer"
           event={() => {
             if (selectedCategory) {
-              setCategory(selectedCategory)
+              setUserCategory(selectedCategory)
               setPage(4)
             } else {
               toast.error("Sélectionne une catégorie")

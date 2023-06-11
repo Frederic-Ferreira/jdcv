@@ -2,13 +2,16 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
+import { locationStore } from "@config/store"
 
-function Fourth({ setPage }) {
-  const [choice, setChoice] = useState("")
+function Fourth() {
+  const { setPage, userChoice, setUserChoice } = locationStore()
+  const [choice, setChoice] = useState(userChoice)
 
   const updateChoice = (key) => {
     setChoice(key)
   }
+
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium">Étape 1</h1>
@@ -64,6 +67,7 @@ function Fourth({ setPage }) {
           text="Continuer"
           event={() => {
             if (choice) {
+              setUserChoice(choice)
               setPage(5)
             } else {
               toast.error("Sélectionne une option")

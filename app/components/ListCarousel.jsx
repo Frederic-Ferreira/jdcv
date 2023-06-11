@@ -74,10 +74,12 @@ function ListCarousel({ list, Card }) {
             transform: `translateX(-${pixels}px)`,
             transition: "transform 0.5s ease-in-out",
           }}
-          className="flex gap-3"
+          className="flex gap-3 p-2"
         >
           {list.map((image) => (
-            <Card key={uid()} image={image} />
+            <div key={uid()} className="h-[300px] w-[220px]">
+              <Card image={image} />
+            </div>
           ))}
         </div>
       </div>

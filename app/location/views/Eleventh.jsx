@@ -6,9 +6,11 @@ import {
   MinusCircleOutlined,
   PlusCircleOutlined,
 } from "@node_modules/@ant-design/icons"
+import { locationStore } from "@config/store"
 
-function Eleventh({ setPage, setCategory }) {
-  const [price, setPrice] = useState(100)
+function Eleventh() {
+  const { userPrice, setUserPrice, setPage } = locationStore()
+  const [price, setPrice] = useState(userPrice)
 
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
@@ -54,6 +56,7 @@ function Eleventh({ setPage, setCategory }) {
           text="Continuer"
           event={() => {
             if (price > 0) {
+              setUserPrice(price)
               setPage(12)
             } else {
               toast.error("Le prix doit être supérieur à 0€")

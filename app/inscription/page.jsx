@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { ClipLoader } from "react-spinners"
-import userStore from "@config/store"
+import { userStore } from "@config/store"
 
 const inputLabelFields = [
   {

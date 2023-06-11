@@ -4,12 +4,14 @@ import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import Address from "@app/location/components/Address"
+import { locationStore } from "@config/store"
 
 const Map = dynamic(() => import("@app/location/components/Map"), {
   ssr: false,
 })
 
-function Fifth({ setPage, onSelect }) {
+function Fifth() {
+  const { setPage, setLocation } = locationStore()
   const [position, setPosition] = useState(null)
 
   const handleLocationSelect = (suggestion) => {
@@ -51,7 +53,7 @@ function Fifth({ setPage, onSelect }) {
           text="Continuer"
           event={() => {
             if (position) {
-              onSelect(position)
+              setLocation(position)
               setPage(6)
             } else {
               toast.error("Sélectionne une adresse")

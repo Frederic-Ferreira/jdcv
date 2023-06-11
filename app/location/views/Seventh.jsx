@@ -4,9 +4,11 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { equipmentList } from "@utils/infos/equipment-list"
 import { v4 as uid } from "@node_modules/uuid/wrapper.mjs"
+import { locationStore } from "@config/store"
 
-function Seventh({ setPage, onSelect }) {
-  const [equipments, setEquipments] = useState([])
+function Seventh() {
+  const { userEquipments, setUserEquipments, setPage } = locationStore()
+  const [equipments, setEquipments] = useState(userEquipments)
 
   const updateEquipments = (key) => {
     if (equipments.includes(key)) {
@@ -59,7 +61,7 @@ function Seventh({ setPage, onSelect }) {
           text="Continuer"
           event={() => {
             if (equipments.length > 0) {
-              onSelect(equipments)
+              setUserEquipments(equipments)
               setPage(8)
             } else {
               toast.error("Sélectionne au moins un équipement")

@@ -5,10 +5,12 @@ import { toast } from "react-hot-toast"
 import { v4 as uid } from "uuid"
 import Image from "next/image"
 import { CloseCircleOutlined } from "@ant-design/icons"
+import { locationStore } from "@config/store"
 
-function Eighth({ setPage, setCategory }) {
+function Eighth() {
+  const { setPage, setUserImages, userImages } = locationStore()
   const input = useRef(null)
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState(userImages)
 
   function handleDeleteImage(id) {
     setImages((images) => images.filter((image) => image.id !== id))
@@ -20,20 +22,17 @@ function Eighth({ setPage, setCategory }) {
   }
 
   function handleDragOver(event) {
-    console.log("handleDragOver")
     event.preventDefault()
     event.dataTransfer.dropEffect = "copy"
   }
 
   function handleDrop(event) {
-    console.log("handleDrop", event.dataTransfer.files)
     event.preventDefault()
     const files = event.dataTransfer.files
     processFiles(files)
   }
 
   function handleFileChange(event) {
-    console.log("handleFileChange", event.target.files)
     const files = event.target.files
     processFiles(files)
   }
@@ -146,9 +145,10 @@ function Eighth({ setPage, setCategory }) {
           text="Continuer"
           event={() => {
             if (images.length >= 5) {
+              setUserImages(images)
               setPage(9)
             } else {
-              toast.error("Upload au moins 5 photos")
+              toast.error("Sélectionne au moins 5 photos")
             }
           }}
         />

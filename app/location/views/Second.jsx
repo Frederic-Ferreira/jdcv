@@ -1,7 +1,10 @@
 "use client"
 import Button from "@app/components/Button"
+import { locationStore } from "@config/store"
 
-function Second({ setPage }) {
+function Second() {
+  const { setPage } = locationStore()
+
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium"> Bienvenue, Prénom</h1>

@@ -2,9 +2,11 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
+import { locationStore } from "@config/store"
 
-function Ninth({ setPage, onSelect }) {
-  const [title, setTitle] = useState("")
+function Ninth() {
+  const { userTitle, setUserTitle, setPage } = locationStore()
+  const [title, setTitle] = useState(userTitle)
 
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
@@ -40,6 +42,7 @@ function Ninth({ setPage, onSelect }) {
           text="Continuer"
           event={() => {
             if (title) {
+              setUserTitle(title)
               setPage(10)
             } else {
               toast.error("Décris ton logement")

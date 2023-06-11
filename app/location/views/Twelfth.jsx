@@ -3,9 +3,11 @@ import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { DateRangePicker } from "@node_modules/@wojtekmaj/react-daterange-picker"
+import { locationStore } from "@config/store"
 
-function Twelfth({ setPage, setCategory }) {
-  const [dates, setDates] = useState([])
+function Twelfth() {
+  const { userDates, setUserDates, setPage } = locationStore()
+  const [dates, setDates] = useState(userDates)
 
   const handleDateChange = (newDates) => {
     setDates(newDates)
@@ -40,6 +42,7 @@ function Twelfth({ setPage, setCategory }) {
           text="Continuer"
           event={() => {
             if (dates.length > 1) {
+              setUserDates(dates)
               setPage(13)
             } else {
               toast.error("Tu dois sélectionner deux dates.")

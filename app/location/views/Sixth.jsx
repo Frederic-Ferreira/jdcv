@@ -2,10 +2,13 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
+import { locationStore } from "@config/store"
 
-function Sixth({ setPage, onSelect }) {
-  const [people, setPeople] = useState("")
-  const [rooms, setRooms] = useState("")
+function Sixth() {
+  const { setPage, setUserPeople, setUserRooms, userPeople, userRooms } =
+    locationStore()
+  const [people, setPeople] = useState(userPeople)
+  const [rooms, setRooms] = useState(userRooms)
 
   const checkIfNumbers = (pep, rom) => {
     const roomNumber = Number(rom)
@@ -62,7 +65,8 @@ function Sixth({ setPage, onSelect }) {
                 toast.error("Les champs doivent être des nombres")
                 return
               }
-              onSelect(people, rooms)
+              setUserRooms(rooms)
+              setUserPeople(people)
               setPage(7)
             } else {
               toast.error("Remplis tous les champs")

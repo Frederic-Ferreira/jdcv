@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import { locationStore } from "@config/store"
 import First from "@app/location/views/First"
 import Second from "@app/location/views/Second"
 import Third from "@app/location/views/Third"
@@ -15,7 +16,7 @@ import Twelfth from "@app/location/views/Twelfth"
 import Final from "@app/location/views/Final"
 
 function Page(props) {
-  const [page, setPage] = useState(12)
+  const { page } = locationStore()
   const [category, setCategory] = useState("")
   const [address, setAddress] = useState(null)
   const [rooms, setRooms] = useState(0)
@@ -29,21 +30,19 @@ function Page(props) {
 
   return (
     <div>
-      {page === 1 && <First setPage={setPage} />}
-      {page === 2 && <Second setPage={setPage} />}
-      {page === 3 && <Third setPage={setPage} setCategory={setCategory} />}
-      {page === 4 && <Fourth setPage={setPage} />}
-      {page === 5 && <Fifth setPage={setPage} onSelect={setAddress} />}
-      {page === 6 && (
-        <Sixth setPage={setPage} onSelect={selectRoomsAndPeople} />
-      )}
-      {page === 7 && <Seventh setPage={setPage} onSelect={setEquipments} />}
-      {page === 8 && <Eighth setPage={setPage} onSelect={setEquipments} />}
-      {page === 9 && <Ninth setPage={setPage} />}
-      {page === 10 && <Tenth setPage={setPage} />}
-      {page === 11 && <Eleventh setPage={setPage} />}
-      {page === 12 && <Twelfth setPage={setPage} />}
-      {page === 13 && <Final setPage={setPage} />}
+      {page === 1 && <First />}
+      {page === 2 && <Second />}
+      {page === 3 && <Third />}
+      {page === 4 && <Fourth />}
+      {page === 5 && <Fifth />}
+      {page === 6 && <Sixth />}
+      {page === 7 && <Seventh />}
+      {page === 8 && <Eighth />}
+      {page === 9 && <Ninth />}
+      {page === 10 && <Tenth />}
+      {page === 11 && <Eleventh />}
+      {page === 12 && <Twelfth />}
+      {page === 13 && <Final />}
     </div>
   )
 }

@@ -2,7 +2,7 @@
 import Image from "next/image"
 function DetailImageCard({ image }) {
   return (
-    <div className="flex flex-col w-[230px] h-[300px] menu-shadow gap-2 rounded-lg hover:cursor-pointer m-2">
+    <div className="flex flex-col w-full h-full shadow-xl gap-2 rounded-lg hover:cursor-pointer">
       <div className="relative w-full h-1/2">
         <Image
           fill={true}

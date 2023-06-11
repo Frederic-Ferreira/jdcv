@@ -15,18 +15,8 @@ import Eleventh from "@app/location/views/Eleventh"
 import Twelfth from "@app/location/views/Twelfth"
 import Final from "@app/location/views/Final"
 
-function Page(props) {
+function Page() {
   const { page } = locationStore()
-  const [category, setCategory] = useState("")
-  const [address, setAddress] = useState(null)
-  const [rooms, setRooms] = useState(0)
-  const [people, setPeople] = useState(0)
-  const [equipments, setEquipments] = useState([])
-
-  const selectRoomsAndPeople = (rooms, people) => {
-    setRooms(rooms)
-    setPeople(people)
-  }
 
   return (
     <div>

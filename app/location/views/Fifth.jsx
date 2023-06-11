@@ -11,8 +11,8 @@ const Map = dynamic(() => import("@app/location/components/Map"), {
 })
 
 function Fifth() {
-  const { setPage, setLocation } = locationStore()
-  const [position, setPosition] = useState(null)
+  const { setPage, location, setLocation } = locationStore()
+  const [position, setPosition] = useState(location)
 
   const handleLocationSelect = (suggestion) => {
     const { latitude, longitude, title, address } = suggestion
@@ -40,7 +40,7 @@ function Fifth() {
       </h5>
       <div className="flex gap-8 h-[200px] w-full -mt-4">
         <Map position={position} />
-        <Address onSelect={handleLocationSelect} />
+        <Address location={location} onSelect={handleLocationSelect} />
       </div>
       <div className="flex items-center justify-between -mt-4">
         <Button

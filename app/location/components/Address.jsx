@@ -3,8 +3,8 @@ import { useState } from "react"
 import { EnvironmentOutlined } from "@node_modules/@ant-design/icons"
 import Image from "next/image"
 
-export default function Address({ onSelect }) {
-  const [place, setPlace] = useState(null)
+export default function Address({ onSelect, location }) {
+  const [place, setPlace] = useState(location?.title || "")
   const [search, setSearch] = useState("")
   const [suggestions, setSuggestions] = useState([])
 

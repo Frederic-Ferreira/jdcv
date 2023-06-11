@@ -348,16 +348,16 @@ function Page(props) {
           <div className="flex flex-col gap-2">
             <div className="flex items-center text-sm justify-between">
               <p className="underline">Frais de service JDCV</p>
-              <p>50e</p>
+              <p>50€</p>
             </div>
             <div className="flex items-center text-sm justify-between">
               <p className="underline">Taxes</p>
-              <p>12e</p>
+              <p>12€</p>
             </div>
           </div>
           <div className="flex items-center justify-between text-lg font-bold">
             <p>Total</p>
-            <p>312e</p>
+            <p>312€</p>
           </div>
           <CustomLink
             path="/"

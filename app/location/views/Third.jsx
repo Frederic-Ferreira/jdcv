@@ -1,6 +1,6 @@
 "use client"
 import Button from "@app/components/Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import { categoryList } from "@utils/infos/category-list"
 import { v4 as uid } from "uuid"
@@ -49,7 +49,7 @@ function Third() {
           </div>
         ))}
       </div>
-      <div className="flex items-center mt-[100px] justify-between ">
+      <div className="flex items-center mt-[32px] justify-between ">
         <Button
           style="text-lg font-light text-black underline hover:cursor-pointer"
           text="Retour"

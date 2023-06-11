@@ -5,17 +5,26 @@ import ImageCard from "@app/components/ImageCard"
 import Image from "next/image"
 import { locationStore } from "@config/store"
 
-const img = {
-  src: "/images/housing/details/carousel/1.png",
-  title: "Chalet atypique et chaleureux",
-  address: "Autrans, Isère, Auvergne Rhône-Alpes, France",
-  category: "Châlet",
-  people: 12,
-  price: 250,
-}
-
 function Final() {
-  const { setPage } = locationStore()
+  const {
+    setPage,
+    userImages,
+    userTitle,
+    location,
+    userCategory,
+    userPeople,
+    userPrice,
+  } = locationStore()
+
+  const img = {
+    src: userImages[0]?.data,
+    title: userTitle,
+    address: location.title,
+    category: userCategory,
+    people: userPeople,
+    price: userPrice,
+  }
+
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium">Vérifie ton annonce</h1>

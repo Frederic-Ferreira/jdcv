@@ -1,16 +1,20 @@
 "use client"
 import Button from "@app/components/Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import { locationStore } from "@config/store"
 
 function Fourth() {
-  const { setPage, userChoice, setUserChoice } = locationStore()
+  const { setPage, userChoice, setUserChoice, userCategory } = locationStore()
   const [choice, setChoice] = useState(userChoice)
 
   const updateChoice = (key) => {
     setChoice(key)
   }
+
+  useEffect(() => {
+    console.log("category", userCategory)
+  }, [])
 
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">

@@ -11,7 +11,7 @@ function DetailImageCard({ image }) {
           alt={image.title}
         />
       </div>
-      <div className="w-full h-1/2 flex flex-col gap-2 px-2 py-1 font-normal ">
+      <div className="w-full h-1/2 flex flex-col gap-2 px-4 py-1 font-normal ">
         <h3 className="text-sm font-medium overflow-hidden whitespace-nowrap overflow-ellipsis">
           {image.title}
         </h3>
@@ -38,7 +38,7 @@ function DetailImageCard({ image }) {
         </div>
         <div className="flex items-center gap-2">
           <h2 className="text-lg font-medium text-[#FF2053]">
-            {image.price}e{" "}
+            {image.price}€{" "}
           </h2>
           <p>/ soirée</p>
         </div>

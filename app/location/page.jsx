@@ -12,6 +12,7 @@ import Ninth from "@app/location/views/Ninth"
 import Tenth from "@app/location/views/Tenth"
 import Eleventh from "@app/location/views/Eleventh"
 import Twelfth from "@app/location/views/Twelfth"
+import Final from "@app/location/views/Final"
 
 function Page(props) {
   const [page, setPage] = useState(12)
@@ -42,6 +43,7 @@ function Page(props) {
       {page === 10 && <Tenth setPage={setPage} />}
       {page === 11 && <Eleventh setPage={setPage} />}
       {page === 12 && <Twelfth setPage={setPage} />}
+      {page === 13 && <Final setPage={setPage} />}
     </div>
   )
 }

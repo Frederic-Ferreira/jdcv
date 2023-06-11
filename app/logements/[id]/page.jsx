@@ -14,7 +14,7 @@ import {
 import Profile from "@app/components/Profile"
 import ListCarousel from "@app/components/ListCarousel"
 import { detailImageStyle } from "@utils/infos/detail-image-style"
-import DetailImageCard from "@app/logements/[id]/components/ImageCard"
+import DetailImageCard from "@app/components/ImageCard"
 
 const logement = [
   "housing-1.png",

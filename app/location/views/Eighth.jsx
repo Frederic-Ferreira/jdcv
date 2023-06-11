@@ -18,9 +18,14 @@ function Eighth({ setPage, setCategory }) {
     input?.current?.click()
   }
 
-  function handleDragOver(e) {
-    e.preventDefault()
-    const files = e.dataTransfer
+  function handleDragOver(event) {
+    event.preventDefault()
+    event.dataTransfer.dropEffect = "copy"
+  }
+
+  function handleDrop(event) {
+    event.preventDefault()
+    const files = event.dataTransfer.files
     processFiles(files)
   }
 
@@ -49,7 +54,7 @@ function Eighth({ setPage, setCategory }) {
           setImages(() => [...images, ...result])
         })
         .catch((error) => {
-          console.log("Erreur de lecture de fichier:", error)
+          console.log("Erreur de lecture de fichier :", error)
         })
     }
   }
@@ -77,15 +82,15 @@ function Eighth({ setPage, setCategory }) {
         <div className="flex flex-col items-center gap-4 w-1/2">
           <div
             onClick={handleSquareClick}
-            onDragOver={handleDragOver}
+            onDragOver={(e) => handleDragOver(e)}
+            onDrop={(e) => handleDrop(e)}
             className="mt-20 w-[400px] h-[350px] flex flex-col gap-8 items-center border-2 border-[#EEEEEE] rounded-xl px-4 py-10 my-auto hover:cursor-pointer"
           >
             {images.length > 0 ? (
               <div className="flex items-center gap-2 flex-wrap overflow-y-auto h-full">
                 {images.map((image, index) => (
-                  <div className="image relative p-2">
+                  <div key={image.id} className="image relative p-2">
                     <img
-                      key={image.id}
                       src={image.data}
                       alt={`Image ${index}`}
                       className="rounded-md h-[100px] w-[100px] object-cover"
@@ -126,7 +131,7 @@ function Eighth({ setPage, setCategory }) {
           </div>
         </div>
       </div>
-      <div className="flex items-center mt-[116px] justify-between ">
+      <div className="flex items-center mt-[82px] justify-between ">
         <Button
           style="text-lg font-light text-black underline hover:cursor-pointer"
           text="Retour"
@@ -136,11 +141,10 @@ function Eighth({ setPage, setCategory }) {
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
           event={() => {
-            if (selectedCategory) {
-              setCategory(selectedCategory)
+            if (images.length >= 5) {
               setPage(9)
             } else {
-              toast.error("Sélectionne une catégorie")
+              toast.error("Upload au moins 5 photos")
             }
           }}
         />

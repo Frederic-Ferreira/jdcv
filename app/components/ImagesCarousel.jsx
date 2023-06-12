@@ -39,7 +39,7 @@ function ImagesCarousel({ images }) {
           {images.map((image) => (
             <img
               key={uid()}
-              src={image.src}
+              src={"http://localhost:8000/symfony-images/" + image.filename}
               style={{ width: "100% !important" }}
               alt="Photos de logement"
             />

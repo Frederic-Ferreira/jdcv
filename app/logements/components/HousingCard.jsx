@@ -4,22 +4,22 @@ import ImagesCarousel from "@app/components/ImagesCarousel"
 import truncateByWords from "@utils/functions/truncateByWords"
 function HousingCard({
   label,
-  title,
+  titre,
   best,
   description,
-  address,
-  people,
-  price,
-  images,
+  adresse,
+  nbPersonne,
+  prixNuit,
+  imgLogements,
 }) {
   return (
     <div className="housing-card grid grid-cols-7 gap-4 w-full">
-      <ImagesCarousel images={images} />
+      <ImagesCarousel images={imgLogements} />
       <div className="flex flex-col col-span-4 gap-2 font-light text-black">
-        <div className="label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-2 opacity-70">
-          {label}
+        <div className="label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-1 opacity-70">
+          Catégorie
         </div>
-        <h2 className="text-xl font-light">{title}</h2>
+        <h2 className="text-xl font-light max-h-[33px] truncate">{titre}</h2>
         {best && (
           <div className="flex items-center gap-2">
             <Image
@@ -33,22 +33,22 @@ function HousingCard({
             </p>
           </div>
         )}
-        <p className="text-sm m-h-[50px]">{truncateByWords(description, 50)}</p>
+        <p className="text-sm m-h-[50px]">{truncateByWords(description, 10)}</p>
         <div className="location flex items-center gap-2 truncate">
           <Image
             src="/images/housing/location.svg"
-            width={20}
-            height={20}
+            width={15}
+            height={15}
             alt="Emplacement"
           />
-          <h2 className="text-lg truncate">{address}</h2>
+          <h2 className="truncate">{adresse}</h2>
         </div>
         <div className="infos flex items-center justify-between">
           <h3 className="text-lg text-[#B1AFAF]">
-            <span className="text-[#4F4F4F]">{people}</span> personnes
+            <span className="text-[#4F4F4F]">{nbPersonne}</span> personnes
           </h3>
           <h3 className="text-lg text-[#B1AFAF]">
-            <span className="text-[#4F4F4F]">{price}$</span>/soirée
+            <span className="text-[#4F4F4F]">{prixNuit}e</span>/soirée
           </h3>
         </div>
       </div>

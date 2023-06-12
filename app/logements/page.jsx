@@ -8,8 +8,7 @@ import FilterTag from "@app/logements/components/FilterTag"
 import HousingCard from "@app/logements/components/HousingCard"
 import { v4 as uid } from "uuid"
 import { filters } from "@utils/infos/filters"
-import { housings } from "@utils/infos/test-housings"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const Map = dynamic(() => import("@app/logements/components/Map"), {
   ssr: false,
@@ -17,6 +16,7 @@ const Map = dynamic(() => import("@app/logements/components/Map"), {
 
 function Housing(props) {
   const [queryFilters, setQueryFilters] = useState([])
+  const [housings, setHousings] = useState([])
 
   const updateFilters = (key) => {
     if (queryFilters.includes(key)) {
@@ -25,6 +25,39 @@ function Housing(props) {
       setQueryFilters([...queryFilters, key])
     }
   }
+
+  useEffect(() => {
+    const searchLogement = async () => {
+      try {
+        const token = localStorage.getItem("token")
+
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/logement/search",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            // Ajoutez ici le corps de la requête si nécessaire
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'appel à l'API")
+        }
+
+        const data = await response.json()
+        // Traitement des données de la réponse
+        console.log(data)
+        setHousings(data?.logements)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    searchLogement()
+  }, [])
 
   return (
     <div className="flex flex-col gap-8 items-center text-lexend mb-20">

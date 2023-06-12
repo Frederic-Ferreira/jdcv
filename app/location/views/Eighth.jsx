@@ -144,7 +144,7 @@ function Eighth() {
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
           event={() => {
-            if (images.length >= 5) {
+            if (images.length >= 1) {
               setUserImages(images)
               setPage(9)
             } else {

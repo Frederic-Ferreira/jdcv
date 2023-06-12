@@ -14,6 +14,7 @@ import Tenth from "@app/location/views/Tenth"
 import Eleventh from "@app/location/views/Eleventh"
 import Twelfth from "@app/location/views/Twelfth"
 import Final from "@app/location/views/Final"
+import Congrats from "@app/location/views/Congrats"
 
 function Page() {
   const { page } = locationStore()
@@ -33,6 +34,7 @@ function Page() {
       {page === 11 && <Eleventh />}
       {page === 12 && <Twelfth />}
       {page === 13 && <Final />}
+      {page === 14 && <Congrats />}
     </div>
   )
 }

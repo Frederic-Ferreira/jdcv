@@ -65,8 +65,8 @@ function Sixth() {
                 toast.error("Les champs doivent être des nombres")
                 return
               }
-              setUserRooms(rooms)
-              setUserPeople(people)
+              setUserRooms(Number(rooms))
+              setUserPeople(Number(people))
               setPage(7)
             } else {
               toast.error("Remplis tous les champs")

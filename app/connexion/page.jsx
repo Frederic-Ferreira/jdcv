@@ -44,6 +44,7 @@ function Connexion({}) {
         username: email,
         password,
       })
+      console.log(res)
       const token = res?.data?.token
       localStorage.setItem("token", token)
       router.push("/")

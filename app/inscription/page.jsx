@@ -59,6 +59,7 @@ function Subscribe({}) {
   const router = useRouter()
   const { setUser } = userStore()
   const [isLoading, setIsLoading] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -86,9 +87,11 @@ function Subscribe({}) {
     try {
       setIsLoading(true)
       setIsLoading(true)
+      console.log(email, name, password, firstName, birthDay)
       const res = await axios.post("/register", {
         email: email,
         nom: name,
+        password: password,
         prenom: firstName,
         dateNaissance: birthDay,
       })

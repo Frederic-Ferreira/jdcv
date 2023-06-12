@@ -27,12 +27,14 @@ function Congrats(props) {
           prixNuit: userPrice,
           nbPersonne: userPeople,
           ville: location.title,
-          cp: "88490",
+          cp: location.cp,
           adresse: location.title,
           gps: `${location.latitude}, ${location.longitude}`,
           chambre: userRooms,
           Imgs: userImages.map((image) => image.data),
         }
+
+        console.log(data)
 
         const response = await fetch("http://127.0.0.1:8000/api/logement", {
           method: "POST",

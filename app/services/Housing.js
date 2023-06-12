@@ -1,6 +1,6 @@
 const HousingService = {}
 
-HousingService.getHousings = function (page, token) {
+HousingService.getHousingList = function (page, token) {
   if (token) {
     return fetch("http://127.0.0.1:8000/api/logement/search", {
       method: "POST",
@@ -8,7 +8,20 @@ HousingService.getHousings = function (page, token) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      // Ajoutez ici le corps de la requête si nécessaire
+      body: JSON.stringify({ page: page }),
+    })
+  }
+}
+
+HousingService.getHousing = function (id, token) {
+  console.log("function called", id, token)
+  if (token && id) {
+    return fetch(`http://127.0.0.1:8000/api/logement/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     })
   }
 }

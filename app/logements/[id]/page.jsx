@@ -15,6 +15,7 @@ import Profile from "@app/components/Profile"
 import ListCarousel from "@app/components/ListCarousel"
 import { detailImageStyle } from "@utils/infos/detail-image-style"
 import DetailImageCard from "@app/components/ImageCard"
+import { useHousing } from "@app/hooks/Housing"
 
 const logement = [
   "housing-1.png",
@@ -51,16 +52,25 @@ const occupe = [
 
 const occupetoi = ["Playlist", "Boissons", "Snacks"]
 
-function Page(props) {
+function Page({ params }) {
   const [people, setPeople] = useState(0)
   const [showPeopleMenu, setShowPeopleMenu] = useState(false)
   const [dates, setDates] = useState([])
   const [showDateMenu, setShowDateMenu] = useState(false)
+  const [housing, setHousing] = useState({})
   const dateMenuRef = useRef(null)
   const peopleMenuRef = useRef(null)
+  const token = localStorage.getItem("token")
+
+  const { data, isFetching } = useHousing(token, +params.id)
+
+  useEffect(() => {
+    if (data) {
+      setHousing(data)
+    }
+  }, [data])
 
   const handleShowPeopleMenu = () => {
-    console.log("show people menu called")
     setShowPeopleMenu(true)
   }
 
@@ -107,9 +117,7 @@ function Page(props) {
     <div className="flex flex-col text-lexend gap-8 text-black pb-10">
       <section className="header w-2/3 flex flex-col gap-2 px-20">
         <div className="flex items-center gap-20">
-          <h1 className="text-xl font-medium">
-            Châlet convivial excentré en montagne
-          </h1>
+          <h1 className="text-xl font-medium">{housing}</h1>
           <div className="category-bg text-sm rounded-lg px-2 py-1 text-white">
             Châlet
           </div>

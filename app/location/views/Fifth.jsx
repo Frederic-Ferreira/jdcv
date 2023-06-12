@@ -15,11 +15,12 @@ function Fifth() {
   const [position, setPosition] = useState(location)
 
   const handleLocationSelect = (suggestion) => {
-    const { latitude, longitude, title, address } = suggestion
+    const { latitude, longitude, title, cp } = suggestion
     setPosition({
       title,
       latitude,
       longitude,
+      cp,
     })
   }
 

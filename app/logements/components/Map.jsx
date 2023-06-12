@@ -41,7 +41,7 @@ function Map() {
     <MapContainer
       center={userLocation}
       zoom={11}
-      style={{ height: "100%", width: "100%", zIndex: 0, borderRadius: 20 }}
+      style={{ height: "600px", width: "100%", zIndex: 0, borderRadius: 20 }}
     >
       <TileLayer
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAP_TOKEN}`}

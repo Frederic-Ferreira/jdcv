@@ -56,7 +56,7 @@ function Eleventh() {
           text="Continuer"
           event={() => {
             if (price > 0) {
-              setUserPrice(price)
+              setUserPrice(Number(price))
               setPage(12)
             } else {
               toast.error("Le prix doit être supérieur à 0€")

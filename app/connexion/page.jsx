@@ -29,7 +29,6 @@ const inputLabelFields = [
 function Connexion({}) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -44,9 +43,10 @@ function Connexion({}) {
         username: email,
         password,
       })
-      console.log(res)
       const token = res?.data?.token
+
       localStorage.setItem("token", token)
+
       router.push("/")
 
       setIsLoading(false)

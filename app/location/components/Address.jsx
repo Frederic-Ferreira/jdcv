@@ -22,6 +22,7 @@ export default function Address({ onSelect, location }) {
             address: feature.properties.city,
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],
+            cp: feature.properties.citycode,
             id: feature.properties.id,
           }))
         )
@@ -34,7 +35,7 @@ export default function Address({ onSelect, location }) {
   }
 
   const handleLocationSelect = (suggestion) => {
-    const { latitude, longitude, title, address } = suggestion
+    const { title } = suggestion
     onSelect(suggestion)
     setPlace(title)
     setSuggestions([])

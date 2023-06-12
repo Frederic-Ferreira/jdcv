@@ -29,10 +29,12 @@ function ImagesCarousel({ images }) {
         onClick={handleLeftClick}
         className="hover:cursor-pointer font-bold text-2xl text-gray-300 absolute left-0 z-10 hover:text-white"
       />
-      <div className="flex w-full h-full overflow-x-hidden">
+      <div className="flex h-full overflow-x-hidden">
         <div
           className="flex transition-transform duration-300"
           style={{
+            width: "300px",
+            height: "200px",
             transform: `translateX(-${currentImageIndex * 100}%)`,
           }}
         >
@@ -40,7 +42,12 @@ function ImagesCarousel({ images }) {
             <img
               key={uid()}
               src={"http://localhost:8000/symfony-images/" + image.filename}
-              style={{ width: "100% !important" }}
+              style={{
+                objectFit: "fill",
+                width: "100%",
+                height: "100%",
+                flexShrink: 0,
+              }}
               alt="Photos de logement"
             />
           ))}

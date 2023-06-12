@@ -9,6 +9,8 @@ import HousingCard from "@app/logements/components/HousingCard"
 import { v4 as uid } from "uuid"
 import { filters } from "@utils/infos/filters"
 import { useState, useEffect } from "react"
+import { useHousingList } from "@app/hooks/Housing"
+import { ClipLoader } from "@node_modules/react-spinners"
 
 const Map = dynamic(() => import("@app/logements/components/Map"), {
   ssr: false,
@@ -17,6 +19,11 @@ const Map = dynamic(() => import("@app/logements/components/Map"), {
 function Housing(props) {
   const [queryFilters, setQueryFilters] = useState([])
   const [housings, setHousings] = useState([])
+  const [totalPages, setTotalPages] = useState(1)
+  const [page, setPage] = useState(1)
+  const token = localStorage.getItem("token")
+
+  const { data, isFetching } = useHousingList(token, page)
 
   const updateFilters = (key) => {
     if (queryFilters.includes(key)) {
@@ -27,37 +34,12 @@ function Housing(props) {
   }
 
   useEffect(() => {
-    const searchLogement = async () => {
-      try {
-        const token = localStorage.getItem("token")
-
-        const response = await fetch(
-          "http://127.0.0.1:8000/api/logement/search",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            // Ajoutez ici le corps de la requête si nécessaire
-          }
-        )
-
-        if (!response.ok) {
-          throw new Error("Erreur lors de l'appel à l'API")
-        }
-
-        const data = await response.json()
-        // Traitement des données de la réponse
-        console.log(data)
-        setHousings(data?.logements)
-      } catch (error) {
-        console.error(error)
-      }
+    console.log(data)
+    if (data?.logements && data?.totalPages) {
+      setHousings(data.logements)
+      setTotalPages(data.totalPages)
     }
-
-    searchLogement()
-  }, [])
+  }, [data])
 
   return (
     <div className="flex flex-col gap-8 items-center text-lexend mb-20">
@@ -100,21 +82,29 @@ function Housing(props) {
             />
           </div>
           <div className="flex flex-col gap-8">
-            {housings.map((housing, i) => (
-              <div key={uid()}>
-                <HousingCard {...housing} />
-                {i < housings.length - 1 && (
-                  <div className="h-[2px] bg-[#EEEEEE] mt-6" />
-                )}
-              </div>
-            ))}
+            {isFetching ? (
+              <ClipLoader className="self-center" size={50} color="#EE7526" />
+            ) : (
+              housings.map((housing, i) => (
+                <div key={uid()}>
+                  <HousingCard {...housing} />
+                  {i < housings.length - 1 && (
+                    <div className="h-[2px] bg-[#EEEEEE] mt-6" />
+                  )}
+                </div>
+              ))
+            )}
           </div>
         </div>
         <div className="map h-full flex items-center justify-center col-span-3">
           <Map />
         </div>
         <div className="col-span-4">
-          <Pagination size="large" count={10} />
+          <Pagination
+            onChange={(e, p) => setPage(p)}
+            size="large"
+            count={totalPages}
+          />
         </div>
       </section>
     </div>

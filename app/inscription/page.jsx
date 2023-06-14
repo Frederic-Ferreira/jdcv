@@ -87,8 +87,8 @@ function Subscribe({}) {
     try {
       setIsLoading(true)
       setIsLoading(true)
-      console.log(email, name, password, firstName, birthDay)
-      const res = await axios.post("/register", {
+
+      const res = await axios.post("/public/register", {
         email: email,
         nom: name,
         password: password,

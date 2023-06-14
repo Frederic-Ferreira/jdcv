@@ -1,6 +1,7 @@
 "use client"
 import { useEffect } from "react"
 import { locationStore } from "@config/store"
+import moment from "moment"
 function Congrats(props) {
   const {
     userCategory,
@@ -32,6 +33,10 @@ function Congrats(props) {
           gps: `${location.latitude}, ${location.longitude}`,
           chambre: userRooms,
           Imgs: userImages.map((image) => image.data),
+          dateStart: moment(userDates[0]).format("YYYY-MM-DD"),
+          dateEnd: moment(userDates[1]).format("YYYY-MM-DD"),
+          style: userCategory,
+          event: userEquipments,
         }
 
         console.log(data)

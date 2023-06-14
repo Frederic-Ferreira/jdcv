@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { DateRangePicker } from "@wojtekmaj/react-daterange-picker"
 import moment from "moment"
 
-function Dates() {
+function Dates({ handleSelect }) {
   const [dates, setDates] = useState([])
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef(null)
@@ -19,6 +19,7 @@ function Dates() {
 
   const handleDateChange = (newDates) => {
     setDates(newDates)
+    handleSelect(newDates)
     handleHideMenu()
   }
 

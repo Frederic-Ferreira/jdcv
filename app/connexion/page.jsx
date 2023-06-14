@@ -47,6 +47,8 @@ function Connexion({}) {
 
       localStorage.setItem("token", token)
 
+      toast.success("Tu es bien connecté :)")
+
       router.push("/")
 
       setIsLoading(false)

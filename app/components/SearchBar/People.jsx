@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
 
-function People() {
+function People({ handleSelect }) {
   const [people, setPeople] = useState(0)
   const [showSearchMenu, setShowSearchMenu] = useState(false)
   const menuRef = useRef(null)
@@ -72,11 +72,23 @@ function People() {
               <TeamOutlined />
               <div className="flex items-center gap-4">
                 <MinusCircleOutlined
-                  onClick={() => people !== 0 && setPeople(people - 1)}
+                  onClick={() => {
+                    people !== 0 && setPeople(people - 1)
+                    if (people !== 0) {
+                      handleSelect(people - 1)
+                    } else {
+                      handleSelect(0)
+                    }
+                  }}
                   className={people == 0 ? "text-gray-400" : "text-black"}
                 />
                 <p className="w-[30px] text-center">{people}</p>
-                <PlusCircleOutlined onClick={() => setPeople(people + 1)} />
+                <PlusCircleOutlined
+                  onClick={() => {
+                    setPeople(people + 1)
+                    handleSelect(people + 1)
+                  }}
+                />
               </div>
             </div>
           </div>

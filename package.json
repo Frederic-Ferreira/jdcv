@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.4",
+    "@stripe/react-stripe-js": "^2.1.0",
     "@wojtekmaj/react-daterange-picker": "^5.2.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",

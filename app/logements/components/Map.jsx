@@ -6,8 +6,9 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility"
 import { useState, useEffect } from "react"
 import { ClipLoader } from "react-spinners"
+import { v4 as uid } from "uuid"
 
-function Map() {
+function Map({ housings }) {
   const [userLocation, setUserLocation] = useState(null)
 
   const customIcon = (price) => {
@@ -37,18 +38,31 @@ function Map() {
     getUserLocation()
   }, [])
 
+  useEffect(() => {
+    console.log(housings)
+  }, [])
+
   return userLocation ? (
     <MapContainer
       center={userLocation}
-      zoom={11}
+      zoom={6}
       style={{ height: "600px", width: "100%", zIndex: 0, borderRadius: 20 }}
     >
       <TileLayer
         url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAP_TOKEN}`}
       />
-      <Marker position={[45.6739, 4.9529]} icon={customIcon("123")}>
-        <Popup>Hey ! I live here</Popup>
-      </Marker>
+      {housings.map((housing) => {
+        const latLng = housing.gps.split(", ")
+        const lat = latLng[0]
+        const lng = latLng[1]
+        return (
+          <Marker
+            key={uid()}
+            position={[lat, lng]}
+            icon={customIcon(housing.prixNuit)}
+          />
+        )
+      })}
     </MapContainer>
   ) : (
     <ClipLoader size={30} color="#296CCEFF" />

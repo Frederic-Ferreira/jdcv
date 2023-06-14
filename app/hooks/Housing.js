@@ -1,23 +1,24 @@
 import HousingService from "@app/services/Housing"
 import { useQuery } from "react-query"
 
-export const useHousingList = (token, page = 1) => {
+export const useHousingList = (params) => {
   return useQuery(
-    ["housingList", page, token],
+    ["housingList", params],
     async () => {
-      const response = await HousingService.getHousingList(page, token)
+      const response = await HousingService.getHousingList(params)
       const data = await response.json()
+      console.log(data)
       return data
     },
     { refetchOnWindowFocus: false, cacheTime: 100000, retry: true }
   )
 }
 
-export const useHousing = (token, id) => {
+export const useHousing = (id) => {
   return useQuery(
-    ["housing", id, token],
+    ["housing", id],
     async () => {
-      const response = await HousingService.getHousing(id, token)
+      const response = await HousingService.getHousing(id)
       const data = await response.json()
       return data
     },

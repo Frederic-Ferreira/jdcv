@@ -6,8 +6,15 @@ import Button from "@app/components/Button"
 import Modal from "@app/components/Modal"
 import { useEffect, useState, useRef } from "react"
 import Events from "@app/components/SearchBar/Events"
-const SearchBar = ({ barWidth }) => {
+import moment from "moment"
+
+const SearchBar = ({ barWidth, event }) => {
   const [showModal, setShowModal] = useState(false)
+  const [people, setPeople] = useState(null)
+  const [cp, setCp] = useState(null)
+  const [events, setEvents] = useState(null)
+  const [dates, setDates] = useState(null)
+
   const searchBarRef = useRef(null)
 
   const handleOpenModal = () => {
@@ -57,13 +64,29 @@ const SearchBar = ({ barWidth }) => {
           "grid grid-cols-11 bg-white rounded-lg search-bar-shadow  " + barWidth
         }
       >
-        <Places />
-        <Dates />
-        <People />
-        <Events />
+        <Places handleSelect={setCp} />
+        <Dates handleSelect={setDates} />
+        <People handleSelect={setPeople} />
+        <Events handleSelect={setEvents} />
         <Button
           style="flex items-center justify-center text-sm rounded-lg bg-black py-2 px-4 text-white hover:bg-opacity-80 col-span-1 truncate hover:cursor-pointer"
           text="Rechercher"
+          event={() => {
+            handleCloseModal()
+            event({
+              departement: +cp || null,
+              startDate:
+                dates?.length > 1
+                  ? moment(dates[0]).format("YYYY-MM-DD")
+                  : null,
+              endDate:
+                dates?.length > 1
+                  ? moment(dates[1]).format("YYYY-MM-DD")
+                  : null,
+              nbPersonne: people || null,
+              event: events || null,
+            })
+          }}
         />
       </div>
       {showModal && <Modal />}

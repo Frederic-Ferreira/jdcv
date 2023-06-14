@@ -129,11 +129,11 @@ function Informations(props) {
           <div className="flex items-center gap-4 text-xs">
             <Button
               text="Pour les hôtes"
-              style="bg-[#ffb700] border border-1 border-[#ffb700] rounded-xl text-white px-4 py-1"
+              style="bg-white border border-1 border-gray-400 rounded-xl text-gray-400 px-4 py-1"
             />
             <Button
               text="Pour les invités"
-              style="bg-white border border-1 border-gray-400 rounded-xl text-gray-400 px-4 py-1"
+              style="bg-[#ffb700] border border-1 border-[#ffb700] rounded-xl text-white px-4 py-1"
             />
           </div>
           <div className="flex flex-col gap-6 font-light">

@@ -1,6 +1,6 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import ImageCard from "@app/components/Gems/ImageCard"
-import { imageCardStyles } from "@utils/infos/image-card-style"
+import { imageCardStyles } from "@utils/infos/style"
 import { v4 as uid } from "uuid"
 import { useEffect, useState, useRef } from "react"
 
@@ -25,22 +25,8 @@ function ListCarousel({ list, Card }) {
     }
   }
 
-  const handleResize = () => {
-    const containerWidth = carouselContainerRef.current.offsetWidth
-    const carouselWidth = carouselRef.current.scrollWidth
-    const translatePixels = 300
-
-    if (containerWidth + translatePixels * translate < carouselWidth) {
-      setPixels(translatePixels * translate)
-    } else {
-      const currentTranslate =
-        containerWidth + translatePixels * (translate - 1)
-      const leftPixels = carouselWidth - currentTranslate
-      setPixels(pixels + leftPixels)
-    }
-  }
-
   useEffect(() => {
+    if (translate === 0) return
     const containerWidth = carouselContainerRef.current.offsetWidth
     const carouselWidth = carouselRef.current.scrollWidth
     const translatePixels = 300
@@ -52,12 +38,6 @@ function ListCarousel({ list, Card }) {
         containerWidth + translatePixels * (translate - 1)
       const leftPixels = carouselWidth - currentTranslate
       setPixels(pixels + leftPixels)
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
     }
   }, [translate])
 

@@ -19,6 +19,12 @@ $color-ternary-opacity: rgba(43, 41, 101, 0.75);
 
 /* App styles */
 
+.grid-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
 .menu-shadow{
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.12);
 }

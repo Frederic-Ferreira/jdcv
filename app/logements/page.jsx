@@ -11,19 +11,28 @@ import { filters } from "@utils/infos/filters"
 import { useState, useEffect } from "react"
 import { useHousingList } from "@app/hooks/Housing"
 import { ClipLoader } from "@node_modules/react-spinners"
+import { useRouter } from "next/navigation"
 
 const Map = dynamic(() => import("@app/logements/components/Map"), {
   ssr: false,
 })
 
-function Housing(props) {
+function Housing({ searchParams }) {
   const [queryFilters, setQueryFilters] = useState([])
+  const [params, setParams] = useState({})
   const [housings, setHousings] = useState([])
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
-  const token = localStorage.getItem("token")
+  const router = useRouter()
 
-  const { data, isFetching } = useHousingList(token, page)
+  const { data, isFetching } = useHousingList({
+    page: page,
+    ...params,
+  })
+
+  useEffect(() => {
+    setParams(searchParams)
+  }, [searchParams])
 
   const updateFilters = (key) => {
     if (queryFilters.includes(key)) {
@@ -35,16 +44,37 @@ function Housing(props) {
 
   useEffect(() => {
     console.log(data)
-    if (data?.logements && data?.totalPages) {
+    if (data?.logements) {
       setHousings(data.logements)
-      setTotalPages(data.totalPages)
+      setTotalPages(data?.totalPages)
     }
   }, [data])
+
+  function handleSearch(args) {
+    let string = ""
+    const { nbPersonne, event, startDate, endDate, departement } = args
+    if (nbPersonne) {
+      string += `nbPersonne=${Number(nbPersonne)}&`
+    }
+    if (departement) {
+      string += `departement=${Number(departement)}&`
+    }
+    if (event) {
+      string += `event=${event[0]}&`
+    }
+    if (startDate) {
+      string += `startDate=${startDate}&`
+    }
+    if (endDate) {
+      string += `endDate=${endDate}`
+    }
+    router.push(`/logements?${string}`)
+  }
 
   return (
     <div className="flex flex-col gap-8 items-center text-lexend mb-20">
       <section className="search-filters flex flex-col w-full">
-        <SearchBar barWidth="w-[90%]" />
+        <SearchBar event={handleSearch} barWidth="w-[90%]" />
         <div className="h-[60px] w-[90%] mt-5 overflow-x-auto rounded-lg self-center">
           <div className="flex flex-nowrap gap-2 items-center justify-start">
             {filters.map((filter) => {
@@ -97,13 +127,13 @@ function Housing(props) {
           </div>
         </div>
         <div className="map h-full flex items-center justify-center col-span-3">
-          <Map />
+          <Map housings={housings} />
         </div>
         <div className="col-span-4">
           <Pagination
             onChange={(e, p) => setPage(p)}
             size="large"
-            count={totalPages}
+            count={totalPages || 1}
           />
         </div>
       </section>

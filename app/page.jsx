@@ -7,11 +7,12 @@ import Gems from "@app/components/Gems/Gems"
 import { infoCards } from "@utils/infos/info-cards"
 import { gems } from "@utils/infos/gems"
 import { v4 as uid } from "uuid"
-import { DownCircleOutlined } from "@ant-design/icons"
+import { useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
 
 export default function Home() {
   const iconRef = useRef(null)
+  const router = useRouter()
   const handleIconClick = () => {
     const searchBar = document.querySelector(".search-bar")
 
@@ -46,6 +47,27 @@ export default function Home() {
       observer.disconnect()
     }
   }, [])
+
+  function handleBarSearch(args) {
+    let string = ""
+    const { nbPersonne, event, startDate, endDate, departement } = args
+    if (nbPersonne) {
+      string += `nbPersonne=${Number(nbPersonne)}&`
+    }
+    if (departement) {
+      string += `departement=${Number(departement)}&`
+    }
+    if (event) {
+      string += `event=${event[0]}&`
+    }
+    if (startDate) {
+      string += `startDate=${startDate}&`
+    }
+    if (endDate) {
+      string += `endDate=${endDate}`
+    }
+    router.push(`/logements?${string}`)
+  }
 
   return (
     <main className="home min-h-screen font-lexend text-white font-light">
@@ -85,7 +107,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center gap-10">
           <h1 className="text-[40px] font-light">Rechercher un lieu de fête</h1>
-          <SearchBar barWidth="w-3/4" />
+          <SearchBar event={handleBarSearch} barWidth="w-3/4" />
         </div>
         <div className="flex items-center justify-center my-16">
           <CustomLink
@@ -119,7 +141,7 @@ export default function Home() {
       <section className="gems flex flex-col gap-10 text-black h-full pb-20">
         <h1 className="text-4xl tracking-wide pl-20">Juste pour la soirée</h1>
         {gems.map((gem) => (
-          <Gems key={uid()} category={gem.category} />
+          <Gems key={uid()} category={gem.category} images={gem.images} />
         ))}
       </section>
       <section className="values flex flex-col items-center text-black text-center gap-10 h-full py-20">
@@ -142,7 +164,7 @@ export default function Home() {
             alt="dessin d'un homme qui danse"
           />
           <CustomLink
-            path="/"
+            path="/informations"
             content="Nos valeurs"
             style="py-2 text-black mr-auto px-14 border-2 border-black hover:bg-black hover:text-white text-center rounded-lg"
           />

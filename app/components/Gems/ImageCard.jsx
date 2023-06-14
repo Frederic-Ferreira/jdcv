@@ -12,7 +12,7 @@ function GemImageCard({ image }) {
       />
       <div className="absolute bottom-8 w-full h-1/3 flex flex-col gap-2 text-center font-normal ">
         <p className="text-sm mt-auto">{image.category}</p>
-        <p className="text-xs">+ de {image.number} pépites</p>
+        <p className="text-xs">+ de 20 pépites</p>
       </div>
     </div>
   )

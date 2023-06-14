@@ -12,10 +12,6 @@ function Fourth() {
     setChoice(key)
   }
 
-  useEffect(() => {
-    console.log("category", userCategory)
-  }, [])
-
   return (
     <div className="flex flex-col gap-8 pt-4 pb-10 px-40">
       <h1 className="text-5xl font-medium">Étape 1</h1>

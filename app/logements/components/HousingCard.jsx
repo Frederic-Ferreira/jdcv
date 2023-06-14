@@ -14,16 +14,19 @@ function HousingCard({
   nbPersonne,
   prixNuit,
   imgLogements,
+  style,
 }) {
   return (
-    <div className="housing-card grid grid-cols-7 gap-4 w-full">
+    <div className="housing-card grid grid-cols-7 gap-4 h-full w-full">
       <ImagesCarousel images={imgLogements} />
-      <div className="flex flex-col col-span-4 gap-2 font-light text-black">
+      <div className="flex flex-col col-span-4 flex-shrink-0 gap-6 font-light text-black">
         <Link key={uid()} href={"/logements/" + id}>
-          <div className="label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-1 opacity-70">
-            Catégorie
+          <div className="mb-3 label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-1 opacity-70">
+            {style.name}
           </div>
-          <h2 className="text-xl font-light max-h-[33px] truncate">{titre}</h2>
+          <h2 className="mb-3 text-xl font-light max-h-[33px] truncate">
+            {titre}
+          </h2>
           {best && (
             <div className="flex items-center gap-2">
               <Image
@@ -37,10 +40,10 @@ function HousingCard({
               </p>
             </div>
           )}
-          <p className="text-sm m-h-[50px]">
+          <p className="mb-3 text-sm m-h-[50px]">
             {truncateByWords(description, 10)}
           </p>
-          <div className="location flex items-center gap-2 truncate">
+          <div className="mb-3 location flex items-center gap-2 truncate">
             <Image
               src="/images/housing/location.svg"
               width={15}

@@ -33,7 +33,9 @@ function Seventh() {
         logement
       </h4>
       <div className="flex flex-wrap items-center gap-6">
-        <h3 className="">Équipements supplémentaires disponibles :</h3>
+        <h3 className="">
+          Quel type d'événements ton logement peut il accueillir :
+        </h3>
         {equipmentList.map((equipment) => (
           <div
             key={uid()}
@@ -61,7 +63,7 @@ function Seventh() {
           text="Continuer"
           event={() => {
             if (equipments.length > 0) {
-              setUserEquipments(equipments)
+              setUserEquipments(equipments[0])
               setPage(8)
             } else {
               toast.error("Sélectionne au moins un équipement")

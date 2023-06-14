@@ -13,7 +13,7 @@ const listEvents = [
   { title: "Conférence", selected: false },
 ]
 
-function Events() {
+function Events({ handleSelect }) {
   const [events, setEvents] = useState([])
   const [eventsList, setEventsList] = useState(listEvents)
   const [showSearchMenu, setShowSearchMenu] = useState(false)
@@ -30,15 +30,15 @@ function Events() {
   const handleSelectEvent = (event) => {
     if (events.includes(event.title)) {
       setEvents(events.filter((e) => e !== event.title))
-      setEventsList(
-        eventsList.map((e) => {
-          if (e.title === event.title) {
-            return { ...e, selected: false }
-          } else {
-            return e
-          }
-        })
-      )
+      const newEvents = eventsList.map((e) => {
+        if (e.title === event.title) {
+          return { ...e, selected: false }
+        } else {
+          return e
+        }
+      })
+      setEventsList(newEvents)
+      handleSelect(newEvents)
     } else {
       setEventsList(
         eventsList.map((e) => {
@@ -50,6 +50,7 @@ function Events() {
         })
       )
       setEvents([...events, event.title])
+      handleSelect([...events, event.title])
     }
   }
 

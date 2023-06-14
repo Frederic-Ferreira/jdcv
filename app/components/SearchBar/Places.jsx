@@ -3,7 +3,7 @@ import Image from "next/image"
 import { EnvironmentOutlined, SearchOutlined } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
 
-function Places() {
+function Places({ handleSelect }) {
   const [place, setPlace] = useState(null)
   const [search, setSearch] = useState("")
   const [suggestions, setSuggestions] = useState([])
@@ -32,6 +32,7 @@ function Places() {
             address: feature.properties.city,
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],
+            cp: feature.properties.postcode,
             id: feature.properties.id,
           }))
         )
@@ -44,12 +45,18 @@ function Places() {
   }
 
   const handleLocationSelect = (suggestion) => {
-    const { latitude, longitude, title, address } = suggestion
+    const { latitude, longitude, title, cp } = suggestion
     setPlace({
       title,
       latitude,
       longitude,
     })
+    handleSelect(
+      cp
+        .split("")
+        .filter((_, i) => i < 2)
+        .join("")
+    )
     setSuggestions([])
     setSearch("")
     handleHideMenu()

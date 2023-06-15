@@ -43,7 +43,6 @@ function Housing({ searchParams }) {
   }
 
   useEffect(() => {
-    console.log(data)
     if (data?.logements) {
       setHousings(data.logements)
       setTotalPages(data?.totalPages)

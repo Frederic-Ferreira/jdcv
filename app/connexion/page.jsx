@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { ClipLoader } from "react-spinners"
+import { userStore } from "@config/store"
 
 const inputLabelFields = [
   {
@@ -29,6 +30,8 @@ const inputLabelFields = [
 function Connexion({}) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const { user, setUser } = userStore()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -45,7 +48,11 @@ function Connexion({}) {
       })
       const token = res?.data?.token
 
+      const user = res?.data?.profile
+
       localStorage.setItem("token", token)
+
+      setUser(user)
 
       toast.success("Tu es bien connecté :)")
 

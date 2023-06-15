@@ -1,33 +1,16 @@
 "use client"
 import Image from "next/image"
-import { DownOutlined } from "@ant-design/icons"
-import CustomLink from "@app/components/Link"
 import React, { useEffect, useRef, useState } from "react"
-import { DateRangePicker } from "@node_modules/@wojtekmaj/react-daterange-picker"
 import { v4 as uid } from "uuid"
-import moment from "@node_modules/moment"
-import {
-  MinusCircleOutlined,
-  PlusCircleOutlined,
-  TeamOutlined,
-} from "@node_modules/@ant-design/icons"
 import Profile from "@app/components/Profile"
 import ListCarousel from "@app/components/ListCarousel"
 import { detailImageStyle } from "@utils/infos/detail-image-style"
 import DetailImageCard from "@app/components/ImageCard"
-import { useHousing } from "@app/hooks/Housing"
 import { ClipLoader } from "@node_modules/react-spinners"
 import ReserveCard from "@app/components/ReserveCard"
+import { userStore } from "@config/store"
 
-const logement = [
-  "housing-1.png",
-  "housing-2.png",
-  "housing-3.png",
-  "housing-4.png",
-  "housing-5.png",
-]
-
-const user = {
+const fakeUser = {
   id: 1,
   name: "Pierre",
   age: 22,
@@ -35,10 +18,6 @@ const user = {
   description:
     "Je suis un véritable amoureux de la nature et des grands espaces. Mon châlet sympathique, perché au sommet des montagnes, est le fruit de mon amour pour les panoramas à couper le souffle et les moments de convivialité partagés. Je crois fermement que la beauté des paysages alpins doit être partagée et célébrée avec d'autres âmes festives.",
   interests: ["Sport", "Musique", "Montagne"],
-}
-
-const currentUser = {
-  id: 2,
 }
 
 const occupe = [
@@ -57,6 +36,7 @@ const occupetoi = ["Playlist", "Boissons", "Snacks"]
 function Page({ params }) {
   const [housing, setHousing] = useState([])
   const [isFetching, setIsFetching] = useState(true)
+  const { user } = userStore()
 
   useEffect(() => {
     async function call() {
@@ -176,7 +156,11 @@ function Page({ params }) {
               <h2 className="gem-category-underline w-[240px] text-xl font-medium underline">
                 Vous ferez la fête avec :
               </h2>
-              <Profile user={user} currentUser={currentUser} />
+              <Profile
+                isFetching={isFetching}
+                user={housing.User.Profile}
+                currentUser={user?.id}
+              />
             </div>
             <div className="w-1/3">
               <Image

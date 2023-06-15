@@ -1,12 +1,22 @@
-import { create } from "zustand"
+import create from "zustand"
+import { persist } from "zustand/middleware"
 
-export const userStore = create((set) => ({
-  user: null,
-  token: null,
-  setUser: (user) => set(() => ({ user })),
-  setToken: (token) => set(() => ({ token })),
-  clearUser: () => set(() => ({ user: null })),
-}))
+export const userStore = create(
+  persist(
+    (set) => ({
+      user: null,
+      token: null,
+      setUser: (user) => set(() => ({ user })),
+      setToken: (token) => set(() => ({ token })),
+      clearUser: () => set(() => ({ user: null })),
+      reset: () => set(() => ({ user: null, token: null })),
+    }),
+    {
+      name: "user-store",
+      getStorage: () => localStorage,
+    }
+  )
+)
 
 export const locationStore = create((set) => ({
   userCategory: null,

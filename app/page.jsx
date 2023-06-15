@@ -85,7 +85,7 @@ export default function Home() {
             </p>
             <CustomLink
               content="Comment ça marche ?"
-              path="/"
+              path="/informations"
               style="py-2 text-black mr-auto px-6 border-2 border-black hover:bg-black hover:text-white text-center rounded-lg"
             />
           </div>

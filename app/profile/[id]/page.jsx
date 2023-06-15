@@ -18,7 +18,7 @@ function Page({ params }) {
       setIsFetching(false)
     }
     call()
-  }, [])
+  }, [user])
 
   return (
     <div className="px-32 py-20">

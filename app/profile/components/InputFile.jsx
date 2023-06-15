@@ -40,7 +40,7 @@ function InputFile({ handler }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 w-1/2">
+    <div className="flex flex-col items-center gap-4 w-1/2 h-[300px]">
       <div
         onClick={(e) => handleSquareClick(e)}
         onDragOver={(e) => handleDragOver(e)}
@@ -48,11 +48,11 @@ function InputFile({ handler }) {
         className="w-[500px] h-[350px] flex flex-col gap-8 items-center border-2 border-[#EEEEEE] rounded-xl px-4 py-10 my-auto hover:cursor-pointer"
       >
         {image ? (
-          <div className="image w-full h-full relative p-2">
+          <div className="flex items-center justify-center image w-full h-full relative p-2">
             <img
               src={image.data}
               alt="Image"
-              className="rounded-md object-cover"
+              className="rounded-md h-full object-cover"
             />
           </div>
         ) : (

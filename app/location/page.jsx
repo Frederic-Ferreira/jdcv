@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { locationStore } from "@config/store"
 import First from "@app/location/views/First"
 import Second from "@app/location/views/Second"
@@ -15,9 +15,23 @@ import Eleventh from "@app/location/views/Eleventh"
 import Twelfth from "@app/location/views/Twelfth"
 import Final from "@app/location/views/Final"
 import Congrats from "@app/location/views/Congrats"
+import { userStore } from "@config/store"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 function Page() {
+  const { user } = userStore()
   const { page } = locationStore()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!user) {
+      toast.error("Vous devez être connecté pour accéder à cette page")
+      setTimeout(() => {
+        router.push("/connexion")
+      }, 1000)
+    }
+  }, [user])
 
   return (
     <div>

@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners"
 import moment from "moment"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
+import { userStore } from "@config/store"
 
 function Page({ searchParams }) {
   const [cardNumber, setCardNumber] = useState("")
@@ -18,6 +19,16 @@ function Page({ searchParams }) {
   const [dates, setDates] = useState(searchParams.dates || [])
   const [people, setPeople] = useState(searchParams.people || 0)
   const router = useRouter()
+  const { user } = userStore()
+
+  useEffect(() => {
+    if (!user) {
+      toast.error("Vous devez être connecté pour accéder à cette page")
+      setTimeout(() => {
+        router.push("/connexion")
+      }, 1000)
+    }
+  }, [user])
 
   const handleReservation = () => {
     if (!cardNumber || !crypto || !date) {

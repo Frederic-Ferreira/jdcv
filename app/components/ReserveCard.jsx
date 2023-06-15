@@ -202,7 +202,7 @@ function ReserveCard({
               height={15}
               alt="icon de personnes"
             />
-            <p className="text-sm">12</p>
+            <p className="text-sm">{housing.chambre}</p>
             <Image
               src="/images/housing/details/reservation/bed.svg"
               width={15}

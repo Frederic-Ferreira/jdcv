@@ -5,6 +5,7 @@ import Link from "@app/components/Link"
 import { v4 as uid } from "uuid"
 import { userStore } from "@config/store"
 import Button from "@app/components/Button"
+import toast from "react-hot-toast"
 
 function Profile(props) {
   const [showMenu, setShowMenu] = useState(false)
@@ -15,6 +16,7 @@ function Profile(props) {
 
   const handleLogout = () => {
     reset()
+    toast.success("Vous êtes déconnecté(e)")
     setShowMenu(false)
   }
 

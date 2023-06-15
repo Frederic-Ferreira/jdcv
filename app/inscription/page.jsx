@@ -121,7 +121,7 @@ function Subscribe({}) {
       <h1 className="text-2xl text-white font-light mb-10">
         J'irai Danser Chez Vous te shoutaite la bienvenue !
       </h1>
-      <div className="flex gap-10 justify-around py-6 px-20 bg-white w-2/3 rounded-lg shadow-lg">
+      <div className="flex gap-10 justify-around py-6 px-20 bg-white mb-10 w-2/3 rounded-lg shadow-lg">
         <div className="flex items-center flex-col text-black gap-4">
           <h2 className="text-[26px] font-[400]">Crée ton compte</h2>
           <p className="text-xs text-center text-[#B1AFAF]">

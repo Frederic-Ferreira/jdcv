@@ -24,7 +24,7 @@ function ImagesCarousel({ images }) {
   }
 
   return (
-    <div className="carousel col-span-3 flex w-full h-full rounded-xl overflow-hidden items-center relative">
+    <div className="carousel col-span-3 flex w-full h-[200px] rounded-xl overflow-hidden items-center relative">
       <LeftOutlined
         onClick={handleLeftClick}
         className="hover:cursor-pointer font-bold text-2xl text-gray-300 absolute left-0 z-10 hover:text-white"
@@ -34,7 +34,7 @@ function ImagesCarousel({ images }) {
           className="flex transition-transform duration-300"
           style={{
             width: "300px",
-            height: "200px",
+            height: "100%",
             transform: `translateX(-${currentImageIndex * 100}%)`,
           }}
         >
@@ -43,7 +43,7 @@ function ImagesCarousel({ images }) {
               key={uid()}
               src={"http://localhost:8000/symfony-images/" + image.filename}
               style={{
-                objectFit: "fill",
+                objectFit: "cover",
                 width: "100%",
                 height: "100%",
                 flexShrink: 0,

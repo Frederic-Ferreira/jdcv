@@ -7,6 +7,8 @@ import { v4 as uid } from "uuid"
 import truncateByWords from "@utils/functions/truncateByWords"
 import moment from "moment"
 import { ClipLoader } from "@node_modules/react-spinners"
+import { userStore } from "@config/store"
+import toast from "react-hot-toast"
 
 function Profile({ user, id, isFetching }) {
   const [isEditing, setIsEditing] = useState(false)
@@ -15,6 +17,10 @@ function Profile({ user, id, isFetching }) {
   const [name, setName] = useState("")
   const [age, setAge] = useState("")
   const [description, setDescription] = useState("")
+  const { setUser } = userStore()
+
+  let token
+  if (typeof window !== "undefined") token = localStorage.getItem("token")
 
   useEffect(() => {
     if (user?.interets) {
@@ -43,7 +49,35 @@ function Profile({ user, id, isFetching }) {
   }
 
   function handleSaveProfile() {
-    // Ajoutez ici votre logique de sauvegarde du profil mis à jour
+    async function call() {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/profile/${user.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            nom: name.split(" ")[1],
+            prenom: name.split(" ")[0],
+            description: description,
+            avatar: image,
+          }),
+        }
+      )
+      const data = await response.json()
+      if (data) {
+        setTimeout(() => {
+          setUser(data)
+          toast.success("Profil mis à jour !")
+        }, 1000)
+      } else {
+        toast.error("Erreur lors de la mise à jour du profil")
+      }
+    }
+
+    call()
     setIsEditing(false)
     // Effectuez toute autre action nécessaire après la sauvegarde
   }
@@ -59,7 +93,7 @@ function Profile({ user, id, isFetching }) {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="text-4xl border border-2 border-gray-300 rounded-md p-2 font-medium w-[150px]"
+                  className="text-4xl border border-2 border-gray-300 rounded-md p-2 font-medium w-[250px]"
                 />
                 <input
                   type="text"
@@ -168,7 +202,7 @@ function Profile({ user, id, isFetching }) {
                   <Button
                     text="Enregistrer le profil"
                     style="bg-[#FF8E37] px-4 py-2 text-white rounded-lg hover:cursor-pointer"
-                    onClick={handleSaveProfile}
+                    event={handleSaveProfile}
                   />
                 ) : (
                   <></>

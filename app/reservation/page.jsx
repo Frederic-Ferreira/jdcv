@@ -25,7 +25,7 @@ function Page({ searchParams }) {
     } else {
       toast.success("Votre réservation a bien été prise en compte")
       setTimeout(() => {
-        router.push("/reservation/confirmation")
+        router.push("/")
       }, 1000)
     }
   }

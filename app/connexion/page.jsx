@@ -42,13 +42,16 @@ function Connexion({}) {
       return toast.error("Veuillez remplir tous les champs")
     try {
       setIsLoading(true)
-      const res = await axios.post("/login_check", {
-        username: email,
+      const res = await axios.post("/login", {
+        email,
         password,
       })
+
       const token = res?.data?.token
 
-      const user = res?.data?.profile
+      const user = res?.data?.user
+
+      console.log(token, user)
 
       localStorage.setItem("token", token)
 

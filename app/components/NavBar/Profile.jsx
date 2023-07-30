@@ -10,7 +10,7 @@ import toast from "react-hot-toast"
 function Profile(props) {
   const [showMenu, setShowMenu] = useState(false)
   const [profileLinks, setProfileLinks] = useState([])
-  const [avatar, setAvatar] = useState([])
+  const [avatar, setAvatar] = useState("/images/nav/default-profile.svg")
   const profileRef = useRef(null)
   const { user, reset } = userStore()
 
@@ -26,7 +26,7 @@ function Profile(props) {
         {
           icon: "/images/nav/subscribe.svg",
           name: "Profile",
-          path: "/profile/1",
+          path: `/profile/${user.id_profile}`,
         },
         {},
         {
@@ -36,7 +36,7 @@ function Profile(props) {
           event: handleLogout,
         },
       ])
-      setAvatar("http://localhost:8000/symfony-images/" + user.avatar)
+      // setAvatar("http://localhost:8000/symfony-images/" + user.avatar)
     } else {
       setProfileLinks([
         {

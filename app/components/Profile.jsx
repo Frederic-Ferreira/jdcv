@@ -5,6 +5,7 @@ import Button from "@app/components/Button"
 import InputFile from "@app/profile/components/InputFile"
 import { v4 as uid } from "uuid"
 import truncateByWords from "@utils/functions/truncateByWords"
+import axios from "@config/axios"
 import moment from "moment"
 import { ClipLoader } from "@node_modules/react-spinners"
 import { userStore } from "@config/store"
@@ -29,11 +30,11 @@ function Profile({ user, id, isFetching }) {
     if (user?.avatar) {
       setImage(user.avatar)
     }
-    if (user?.prenom && user?.nom) {
-      setName(`${user.prenom} ${user.nom}`)
+    if (user?.first_name && user?.last_name) {
+      setName(`${user.first_name} ${user.last_name}`)
     }
-    if (user?.dateNaissance) {
-      setAge(moment().diff(user?.dateNaissance, "years"))
+    if (user?.birthday) {
+      setAge(moment().diff(user?.birthday, "years"))
     }
     if (user?.description) {
       setDescription(user.description)
@@ -50,36 +51,34 @@ function Profile({ user, id, isFetching }) {
 
   function handleSaveProfile() {
     async function call() {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/profile/${user.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            nom: name.split(" ")[1],
-            prenom: name.split(" ")[0],
+      try {
+        const headers = { Authorization: token }
+        const response = await axios.patch(
+          `/profile/${user.id_profile}`,
+          {
+            first_name: name.split(" ")[1],
+            last_name: name.split(" ")[0],
             description: description,
             avatar: image,
-          }),
+          },
+          { headers }
+        )
+
+        const { user: userData } = response.data
+
+        if (userData) {
+          setTimeout(() => {
+            setUser(userData)
+            toast.success("Profil mis à jour !")
+          }, 1000)
         }
-      )
-      const data = await response.json()
-      if (data) {
-        setTimeout(() => {
-          setUser(data)
-          toast.success("Profil mis à jour !")
-        }, 1000)
-      } else {
-        toast.error("Erreur lors de la mise à jour du profil")
+      } catch (e) {
+        throw new Error("Il semble y avoir un problème avec le serveur")
       }
     }
 
     call()
     setIsEditing(false)
-    // Effectuez toute autre action nécessaire après la sauvegarde
   }
 
   return (
@@ -207,13 +206,13 @@ function Profile({ user, id, isFetching }) {
                 ) : (
                   <></>
                 )}
-                {!isEditing && id === user.id ? (
+                {!isEditing && id === user.id_profile ? (
                   <Button
                     text="Modifier le profil"
                     style="bg-black px-4 py-2 rounded-lg text-white hover:cursor-pointer"
                     event={handleEditProfile}
                   />
-                ) : isEditing && id === user.id ? (
+                ) : isEditing && id === user.id_profile ? (
                   <Button
                     text="Annuler"
                     style="bg-black px-4 py-2 rounded-lg text-white hover:cursor-pointer"

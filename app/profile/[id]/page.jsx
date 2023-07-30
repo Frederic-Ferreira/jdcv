@@ -2,6 +2,7 @@
 import Profile from "@app/components/Profile"
 import { userStore } from "@config/store"
 import { useEffect, useState } from "react"
+import axios from "@config/axios"
 
 function Page({ params }) {
   const [currentUser, setCurrentUser] = useState(null)
@@ -10,11 +11,13 @@ function Page({ params }) {
 
   useEffect(() => {
     async function call() {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/public/profile/${+params.id}`
-      )
-      const data = await response.json()
-      setCurrentUser(data)
+      try {
+        const res = await axios.get(`/profile/${params.id}`)
+        const { profile } = res?.data
+        setCurrentUser(profile)
+      } catch (e) {
+        throw new Error("Il semble y avoir un problème avec le serveur")
+      }
       setIsFetching(false)
     }
     call()
@@ -22,7 +25,11 @@ function Page({ params }) {
 
   return (
     <div className="px-32 py-20">
-      <Profile isFetching={isFetching} user={currentUser} id={user?.id} />
+      <Profile
+        isFetching={isFetching}
+        user={currentUser}
+        id={user?.id_profile}
+      />
     </div>
   )
 }

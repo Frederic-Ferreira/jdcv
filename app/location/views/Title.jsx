@@ -4,7 +4,7 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { locationStore } from "@config/store"
 
-function Ninth() {
+function Title() {
   const { userTitle, setUserTitle, setPage } = locationStore()
   const [title, setTitle] = useState(userTitle)
 
@@ -54,4 +54,4 @@ function Ninth() {
   )
 }
 
-export default Ninth
+export default Title

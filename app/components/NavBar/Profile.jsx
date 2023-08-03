@@ -36,7 +36,7 @@ function Profile(props) {
           event: handleLogout,
         },
       ])
-      // setAvatar("http://localhost:8000/symfony-images/" + user.avatar)
+      setAvatar("http://127.0.0.1:3001/api/images/" + user.avatar)
     } else {
       setProfileLinks([
         {
@@ -79,7 +79,7 @@ function Profile(props) {
         className="profile hover:cursor-pointer rounded-full"
         onClick={() => setShowMenu(!showMenu)}
         src={avatar}
-        style={{ height: 50, width: 50 }}
+        style={{ height: 50, width: 50, objectFit: "cover" }}
         alt="avatar"
       />
       {showMenu && (
@@ -103,7 +103,7 @@ function Profile(props) {
                 </div>
               </div>
             ) : (
-              <div className="border-b-2 border-gray-100" />
+              <div className="border-b-2 border-gray-100" key={uid()} />
             )
           })}
         </div>

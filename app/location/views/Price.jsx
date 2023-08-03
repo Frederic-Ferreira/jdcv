@@ -8,7 +8,7 @@ import {
 } from "@node_modules/@ant-design/icons"
 import { locationStore } from "@config/store"
 
-function Eleventh() {
+function Price() {
   const { userPrice, setUserPrice, setPage } = locationStore()
   const [price, setPrice] = useState(userPrice)
 
@@ -68,4 +68,4 @@ function Eleventh() {
   )
 }
 
-export default Eleventh
+export default Price

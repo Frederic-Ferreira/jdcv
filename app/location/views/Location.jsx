@@ -5,22 +5,28 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import Address from "@app/location/components/Address"
 import { locationStore } from "@config/store"
+import unidecode from "unidecode"
 
 const Map = dynamic(() => import("@app/location/components/Map"), {
   ssr: false,
 })
 
-function Fifth() {
+function Location() {
   const { setPage, location, setLocation } = locationStore()
   const [position, setPosition] = useState(location)
 
   const handleLocationSelect = (suggestion) => {
-    const { latitude, longitude, title, cp } = suggestion
+    const { latitude, longitude, address, context, post_code } = suggestion
+    const region = unidecode(
+      context.split(",")[2].trim().replace(/[- ]/g, "_").toLowerCase()
+    )
+
     setPosition({
-      title,
+      address,
+      post_code,
       latitude,
       longitude,
-      cp,
+      region,
     })
   }
 
@@ -66,4 +72,4 @@ function Fifth() {
   )
 }
 
-export default Fifth
+export default Location

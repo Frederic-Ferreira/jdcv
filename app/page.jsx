@@ -9,10 +9,12 @@ import { gems } from "@utils/infos/gems"
 import { v4 as uid } from "uuid"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
+import unidecode from "unidecode"
 
 export default function Home() {
   const iconRef = useRef(null)
   const router = useRouter()
+
   const handleIconClick = () => {
     const searchBar = document.querySelector(".search-bar")
 
@@ -50,21 +52,21 @@ export default function Home() {
 
   function handleBarSearch(args) {
     let string = ""
-    const { nbPersonne, event, startDate, endDate, departement } = args
-    if (nbPersonne) {
-      string += `nbPersonne=${Number(nbPersonne)}&`
+    const { nb_people, events, start_date, end_date, post_code } = args
+    if (nb_people) {
+      string += `nb_people=${Number(nb_people)}&`
     }
-    if (departement) {
-      string += `departement=${Number(departement)}&`
+    if (post_code) {
+      string += `post_code=${Number(post_code)}&`
     }
-    if (event) {
-      string += `event=${event[0]}&`
+    if (events) {
+      string += `events=${unidecode(events.join(",").toLowerCase())}&`
     }
-    if (startDate) {
-      string += `startDate=${startDate}&`
+    if (start_date) {
+      string += `start_date=${start_date}&`
     }
-    if (endDate) {
-      string += `endDate=${endDate}`
+    if (end_date) {
+      string += `end_date=${end_date}`
     }
     router.push(`/logements?${string}`)
   }

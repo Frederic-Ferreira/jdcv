@@ -11,7 +11,7 @@ import moment from "moment"
 const SearchBar = ({ barWidth, event }) => {
   const [showModal, setShowModal] = useState(false)
   const [people, setPeople] = useState(null)
-  const [cp, setCp] = useState(null)
+  const [postCode, setPostCode] = useState(null)
   const [events, setEvents] = useState(null)
   const [dates, setDates] = useState(null)
 
@@ -64,7 +64,7 @@ const SearchBar = ({ barWidth, event }) => {
           "grid grid-cols-11 bg-white rounded-lg search-bar-shadow  " + barWidth
         }
       >
-        <Places handleSelect={setCp} />
+        <Places handleSelect={setPostCode} />
         <Dates handleSelect={setDates} />
         <People handleSelect={setPeople} />
         <Events handleSelect={setEvents} />
@@ -74,17 +74,17 @@ const SearchBar = ({ barWidth, event }) => {
           event={() => {
             handleCloseModal()
             event({
-              departement: +cp || null,
-              startDate:
+              post_code: postCode || null,
+              start_date:
                 dates?.length > 1
                   ? moment(dates[0]).format("YYYY-MM-DD")
                   : null,
-              endDate:
+              end_date:
                 dates?.length > 1
                   ? moment(dates[1]).format("YYYY-MM-DD")
                   : null,
-              nbPersonne: people || null,
-              event: events || null,
+              nb_people: people || null,
+              events: events || null,
             })
           }}
         />

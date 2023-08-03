@@ -9,7 +9,7 @@ import HousingCard from "@app/logements/components/HousingCard"
 import { v4 as uid } from "uuid"
 import { filters } from "@utils/infos/filters"
 import { useState, useEffect } from "react"
-import { useHousingList } from "@app/hooks/Housing"
+import HousingHooks from "@app/hooks/Housing"
 import { ClipLoader } from "@node_modules/react-spinners"
 import { useRouter } from "next/navigation"
 
@@ -20,19 +20,32 @@ const Map = dynamic(() => import("@app/logements/components/Map"), {
 function Housing({ searchParams }) {
   const [queryFilters, setQueryFilters] = useState([])
   const [params, setParams] = useState({})
+  const [token, setToken] = useState(null)
   const [housings, setHousings] = useState([])
   const [totalPages, setTotalPages] = useState(1)
   const [page, setPage] = useState(1)
   const router = useRouter()
 
-  const { data, isFetching } = useHousingList({
-    page: page,
-    ...params,
-  })
+  useEffect(() => {
+    setToken(localStorage.getItem("token"))
+  }, [])
 
   useEffect(() => {
     setParams(searchParams)
   }, [searchParams])
+
+  const { data, isFetching } = HousingHooks.useHousingList({
+    page: page,
+    token,
+    ...params,
+  })
+
+  useEffect(() => {
+    if (!isFetching) {
+      setHousings(data?.housingList)
+      setTotalPages(data?.total)
+    }
+  }, [data])
 
   const updateFilters = (key) => {
     if (queryFilters.includes(key)) {

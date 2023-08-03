@@ -1,4 +1,4 @@
-export const equipmentList = [
+export const eventList = [
   "Apéro chill",
   "Barbecue",
   "Anniversaire",

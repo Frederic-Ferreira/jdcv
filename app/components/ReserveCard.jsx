@@ -78,15 +78,15 @@ function ReserveCard({
       className="flex flex-col bg-[#F5F5F5] rounded-lg gap-6 w-1/3 py-10 px-4 shadow-xl"
     >
       <p>
-        à partir de{" "}
-        <span className="text-lg font-bold">{housing.prixNuit}€</span> / soirée
+        à partir de <span className="text-lg font-bold">{housing.price}€</span>{" "}
+        / soirée
       </p>
-      <div className="flex items-center justify-between gap-2">
-        <div className="flex flex-col gap-2">
+      <div className="flex items-center w-full justify-between gap-2">
+        <div className="flex w-1/2 flex-col gap-2">
           <p className="text-sm">Dates</p>
           <div
             onClick={handleShowDateMenu}
-            className="housing flex items-center w-[165px] hover:cursor-pointer text-sm bg-white rounded-xl px-2 py-2 font-light justify-between gap-2 border border-1 border-gray-300 relative"
+            className="housing flex items-center hover:cursor-pointer text-sm bg-white rounded-xl px-2 py-2 font-light justify-between gap-2 border border-1 border-gray-300 relative"
           >
             <p
               className="text-sm truncate"
@@ -122,11 +122,11 @@ function ReserveCard({
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex w-1/2 flex-col gap-2">
           <p className="text-sm">Nombre de personnes</p>
           <div
             onClick={handleShowPeopleMenu}
-            className="people flex w-[190px] items-center hover:cursor-pointer text-sm bg-white rounded-lg px-2 py-2 font-light justify-between gap-2 border border-1 border-gray-300 relative"
+            className="people flex items-center hover:cursor-pointer text-sm bg-white rounded-lg px-2 py-2 font-light justify-between gap-2 border border-1 border-gray-300 relative"
           >
             <p
               className="text-sm truncate"
@@ -181,13 +181,15 @@ function ReserveCard({
       </div>
       <div className="flex gap-2 h-[100px] -mt-4 rounded-lg bg-white overflow-hidden">
         <img
-          src={`http://localhost:8000/symfony-images/${housing.imgLogements[0].filename}`}
+          src={`http://127.0.0.1:3001/api/images/${
+            housing.photos.split(",")[0]
+          }`}
           width="33%"
           height="100%"
           alt="photo logement"
         />
         <div className="flex flex-col gap-2 my-auto ml-4">
-          <p className="font-medium truncate w-[220px]">{housing.titre}</p>
+          <p className="font-medium truncate w-[220px]">{housing.title}</p>
           <div className="flex items-center gap-2">
             <Image
               src="/images/housing/details/reservation/people.svg"
@@ -195,14 +197,14 @@ function ReserveCard({
               height={15}
               alt="icon de personnes"
             />
-            <p className="text-sm">{housing.nbPersonne}</p>
+            <p className="text-sm">{housing.nb_people}</p>
             <Image
               src="/images/housing/details/reservation/room.svg"
               width={15}
               height={15}
               alt="icon de personnes"
             />
-            <p className="text-sm">{housing.chambre}</p>
+            <p className="text-sm">{housing.nb_room}</p>
             <Image
               src="/images/housing/details/reservation/bed.svg"
               width={15}
@@ -218,8 +220,8 @@ function ReserveCard({
           <p className="underline">Frais de service JDCV</p>
           <p>
             {dates.length > 1 && numberOfDays === 0
-              ? Math.round(housing.prixNuit * 1 * 0.14)
-              : Math.round(housing.prixNuit * numberOfDays * 0.14)}
+              ? Math.round(housing.price * 1 * 0.14)
+              : Math.round(housing.price * numberOfDays * 0.14)}
             €
           </p>
         </div>
@@ -227,8 +229,8 @@ function ReserveCard({
           <p className="underline">Taxes</p>
           <p>
             {dates.length > 1 && numberOfDays === 0
-              ? Math.round(housing.prixNuit * 1 * 0.14 * 0.2)
-              : Math.round(housing.prixNuit * numberOfDays * 0.14 * 0.2)}
+              ? Math.round(housing.price * 1 * 0.14 * 0.2)
+              : Math.round(housing.price * numberOfDays * 0.14 * 0.2)}
             €
           </p>
         </div>
@@ -237,13 +239,13 @@ function ReserveCard({
         <p>Total</p>
         <p>
           {dates.length > 0 && numberOfDays === 0
-            ? housing.prixNuit * 1 +
-              Math.round(housing.prixNuit * 1 * 0.14) +
-              Math.round(housing.prixNuit * 1 * 0.14 * 0.2)
+            ? housing.price * 1 +
+              Math.round(housing.price * 1 * 0.14) +
+              Math.round(housing.price * 1 * 0.14 * 0.2)
             : dates.length > 0 && numberOfDays > 0
-            ? housing.prixNuit * numberOfDays +
-              Math.round(housing.prixNuit * numberOfDays * 0.14) +
-              Math.round(housing.prixNuit * numberOfDays * 0.14 * 0.2)
+            ? housing.price * numberOfDays +
+              Math.round(housing.price * numberOfDays * 0.14) +
+              Math.round(housing.price * numberOfDays * 0.14 * 0.2)
             : 0}
           €
         </p>

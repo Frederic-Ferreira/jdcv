@@ -1,26 +1,25 @@
 "use client"
 import Button from "@app/components/Button"
-import { toast } from "@node_modules/react-hot-toast"
 import ImageCard from "@app/components/ImageCard"
 import Image from "next/image"
 import { locationStore } from "@config/store"
 
-function Final() {
+function Summary() {
   const {
     setPage,
-    userImages,
+    userMainImage,
     userTitle,
     location,
-    userCategory,
+    userStyle,
     userPeople,
     userPrice,
   } = locationStore()
 
   const img = {
-    src: userImages[0]?.data,
+    src: userMainImage?.data,
     title: userTitle,
-    address: location.title,
-    category: userCategory,
+    address: location.address,
+    style: userStyle,
     people: userPeople,
     price: userPrice,
   }
@@ -94,4 +93,4 @@ function Final() {
   )
 }
 
-export default Final
+export default Summary

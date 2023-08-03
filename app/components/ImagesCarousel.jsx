@@ -24,7 +24,7 @@ function ImagesCarousel({ images }) {
   }
 
   return (
-    <div className="carousel col-span-3 flex w-full h-[200px] rounded-xl overflow-hidden items-center relative">
+    <div className="carousel col-span-3 flex h-[200px] rounded-xl overflow-hidden items-center relative">
       <LeftOutlined
         onClick={handleLeftClick}
         className="hover:cursor-pointer font-bold text-2xl text-gray-300 absolute left-0 z-10 hover:text-white"
@@ -41,7 +41,7 @@ function ImagesCarousel({ images }) {
           {images.map((image) => (
             <img
               key={uid()}
-              src={"http://localhost:8000/symfony-images/" + image.filename}
+              src={"http://127.0.0.1:3001/api/images/" + image}
               style={{
                 objectFit: "cover",
                 width: "100%",

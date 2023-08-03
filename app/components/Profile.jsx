@@ -18,10 +18,13 @@ function Profile({ user, id, isFetching }) {
   const [name, setName] = useState("")
   const [age, setAge] = useState("")
   const [description, setDescription] = useState("")
+  const [token, setToken] = useState(null)
   const { setUser } = userStore()
 
-  let token
-  if (typeof window !== "undefined") token = localStorage.getItem("token")
+  useEffect(() => {
+    const userToken = localStorage.getItem("token")
+    setToken(userToken)
+  }, [])
 
   useEffect(() => {
     if (user?.interets) {
@@ -52,13 +55,15 @@ function Profile({ user, id, isFetching }) {
   function handleSaveProfile() {
     async function call() {
       try {
-        const headers = { Authorization: token }
+        const headers = {
+          Authorization: token,
+        }
         const response = await axios.patch(
           `/profile/${user.id_profile}`,
           {
             first_name: name.split(" ")[1],
             last_name: name.split(" ")[0],
-            description: description,
+            description,
             avatar: image,
           },
           { headers }
@@ -135,7 +140,7 @@ function Profile({ user, id, isFetching }) {
               <img
                 src={
                   image
-                    ? "http://localhost:8000/symfony-images/" + image
+                    ? "http://127.0.0.1:3001/api/images/" + image
                     : "/images/profile/man-selfie.jpeg"
                 }
                 alt="photo de profil"

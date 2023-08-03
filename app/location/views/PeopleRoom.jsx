@@ -4,7 +4,7 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { locationStore } from "@config/store"
 
-function Sixth() {
+function PeopleRoom() {
   const { setPage, setUserPeople, setUserRooms, userPeople, userRooms } =
     locationStore()
   const [people, setPeople] = useState(userPeople)
@@ -78,4 +78,4 @@ function Sixth() {
   )
 }
 
-export default Sixth
+export default PeopleRoom

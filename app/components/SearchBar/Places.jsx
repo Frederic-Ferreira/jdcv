@@ -26,13 +26,15 @@ function Places({ handleSelect }) {
           `https://api-adresse.data.gouv.fr/search/?q=${value}&limit=5`
         )
         const data = await response.json()
+
         setSuggestions(
           data?.features?.map((feature) => ({
             title: feature.properties.label,
             address: feature.properties.city,
+            post_code: feature.properties.postcode,
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],
-            cp: feature.properties.postcode,
+            city: feature.properties.city,
             id: feature.properties.id,
           }))
         )
@@ -45,18 +47,13 @@ function Places({ handleSelect }) {
   }
 
   const handleLocationSelect = (suggestion) => {
-    const { latitude, longitude, title, cp } = suggestion
+    const { latitude, longitude, title, post_code } = suggestion
     setPlace({
       title,
       latitude,
       longitude,
     })
-    handleSelect(
-      cp
-        .split("")
-        .filter((_, i) => i < 2)
-        .join("")
-    )
+    handleSelect(post_code)
     setSuggestions([])
     setSearch("")
     handleHideMenu()

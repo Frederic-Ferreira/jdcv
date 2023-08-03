@@ -25,7 +25,7 @@ function DetailImageCard({ image }) {
           <p className="text-xs font-light truncate">{image.address}</p>
         </div>
         <div className="text-center p-1 text-white text-xs rounded-lg bg-[#FF2053] w-1/3">
-          {image.category}
+          {image.style}
         </div>
         <div className="flex items-center gap-2">
           <Image

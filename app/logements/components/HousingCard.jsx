@@ -4,28 +4,28 @@ import Link from "next/link"
 import ImagesCarousel from "@app/components/ImagesCarousel"
 import truncateByWords from "@utils/functions/truncateByWords"
 import { v4 as uid } from "@node_modules/uuid"
+
 function HousingCard({
-  id,
-  label,
-  titre,
-  best,
+  id_housing,
+  title,
   description,
-  adresse,
-  nbPersonne,
-  prixNuit,
-  imgLogements,
+  address,
+  nb_people,
+  price,
   style,
+  photos,
+  best,
 }) {
   return (
-    <div className="housing-card grid grid-cols-7 gap-4 h-full w-full">
-      <ImagesCarousel images={imgLogements} />
-      <div className="flex flex-col col-span-4 flex-shrink-0 gap-6 font-light text-black">
-        <Link key={uid()} href={"/logements/" + id}>
+    <div className="housing-card flex grid-cols-7 gap-4 h-full w-full">
+      <ImagesCarousel images={photos.split(",")} />
+      <div className="flex flex-col col-span-4 gap-6 font-light text-black">
+        <Link key={uid()} href={"/logements/" + id_housing}>
           <div className="mb-3 label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-1 opacity-70">
-            {style.name}
+            {style}
           </div>
           <h2 className="mb-3 text-xl font-light max-h-[33px] truncate">
-            {titre}
+            {title}
           </h2>
           {best && (
             <div className="flex items-center gap-2">
@@ -50,14 +50,14 @@ function HousingCard({
               height={15}
               alt="Emplacement"
             />
-            <h2 className="truncate">{adresse}</h2>
+            <h2 className="truncate">{address}</h2>
           </div>
           <div className="infos flex items-center justify-between">
             <h3 className="text-lg text-[#B1AFAF]">
-              <span className="text-[#4F4F4F]">{nbPersonne}</span> personnes
+              <span className="text-[#4F4F4F]">{nb_people}</span> personnes
             </h3>
             <h3 className="text-lg text-[#B1AFAF]">
-              <span className="text-[#4F4F4F]">{prixNuit}e</span>/soirée
+              <span className="text-[#4F4F4F]">{price}e</span>/soirée
             </h3>
           </div>
         </Link>

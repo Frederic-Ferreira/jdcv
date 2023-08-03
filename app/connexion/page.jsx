@@ -51,8 +51,6 @@ function Connexion({}) {
 
       const user = res?.data?.user
 
-      console.log(token, user)
-
       localStorage.setItem("token", token)
 
       setUser(user)

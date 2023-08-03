@@ -2,19 +2,21 @@
 import Button from "@app/components/Button"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { equipmentList } from "@utils/infos/equipment-list"
+import { eventList } from "@utils/infos/event-list"
 import { v4 as uid } from "@node_modules/uuid/wrapper.mjs"
 import { locationStore } from "@config/store"
+import unidecode from "unidecode"
 
-function Seventh() {
-  const { userEquipments, setUserEquipments, setPage } = locationStore()
-  const [equipments, setEquipments] = useState(userEquipments)
+function Event() {
+  const { userEvents, setUserEvents, setPage } = locationStore()
+  const [events, setEvents] = useState(userEvents?.split(",") || [])
 
-  const updateEquipments = (key) => {
-    if (equipments.includes(key)) {
-      setEquipments(equipments.filter((equipment) => equipment !== key))
+  const updateEvents = (title) => {
+    const key = unidecode(title.replace(/ /g, "_").toLowerCase())
+    if (events.includes(key)) {
+      setEvents(events.filter((event) => event !== key))
     } else {
-      setEquipments([...equipments, key])
+      setEvents([...events, key])
     }
   }
 
@@ -29,26 +31,32 @@ function Seventh() {
         une description.
       </p>
       <h4 className="text-xl">
-        Indique aux voyageurs quels sont les équipements présents dans ton
-        logement
+        Indique aux voyageurs pour quels types d'événements ton logement serait
+        le plus approprié
       </h4>
       <div className="flex flex-wrap items-center gap-6">
         <h3 className="">
           Quel type d'événements ton logement peut il accueillir :
         </h3>
-        {equipmentList.map((equipment) => (
+        {eventList.map((event) => (
           <div
             key={uid()}
-            onClick={() => updateEquipments(equipment)}
+            onClick={() => updateEvents(event)}
             className="min-w-[200px] border border-1 border-black py-2 text-center rounded-md hover:cursor-pointer"
             style={{
-              backgroundColor: equipments.includes(equipment)
+              backgroundColor: events.includes(
+                unidecode(event.replace(/ /g, "_").toLowerCase())
+              )
                 ? "black"
                 : "white",
-              color: equipments.includes(equipment) ? "white" : "black",
+              color: events.includes(
+                unidecode(event.replace(/ /g, "_").toLowerCase())
+              )
+                ? "white"
+                : "black",
             }}
           >
-            {equipment}
+            {event}
           </div>
         ))}
       </div>
@@ -62,8 +70,9 @@ function Seventh() {
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
           event={() => {
-            if (equipments.length > 0) {
-              setUserEquipments(equipments[0])
+            if (events.length > 0) {
+              if (events[0] === "") events.shift()
+              setUserEvents(events.join(","))
               setPage(8)
             } else {
               toast.error("Sélectionne au moins un équipement")
@@ -75,4 +84,4 @@ function Seventh() {
   )
 }
 
-export default Seventh
+export default Event

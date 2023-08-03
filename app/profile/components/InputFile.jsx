@@ -32,8 +32,13 @@ function InputFile({ handler }) {
     if (file) {
       const reader = new FileReader()
       reader.onload = (event) => {
+        const imageData = event.target.result
+          .replace(/^data:image\/png;base64,/, "")
+          .replace(/^data:image\/jpg;base64,/, "")
+          .replace(/^data:image\/jpeg;base64,/, "")
+          .replace(/^data:image\/gif;base64,/, "")
         setImage({ id: uid(), data: event.target.result })
-        handler(event.target.result)
+        handler(imageData)
       }
       reader.readAsDataURL(file)
     }

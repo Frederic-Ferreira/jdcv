@@ -4,7 +4,7 @@ import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { locationStore } from "@config/store"
 
-function Tenth() {
+function Description() {
   const { userDescription, setUserDescription, setPage } = locationStore()
   const [description, setDescription] = useState(userDescription)
 
@@ -61,4 +61,4 @@ function Tenth() {
   )
 }
 
-export default Tenth
+export default Description

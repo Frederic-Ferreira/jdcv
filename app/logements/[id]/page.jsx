@@ -8,17 +8,8 @@ import { detailImageStyle } from "@utils/infos/detail-image-style"
 import DetailImageCard from "@app/components/ImageCard"
 import { ClipLoader } from "@node_modules/react-spinners"
 import ReserveCard from "@app/components/ReserveCard"
+import HousingHooks from "@app/hooks/Housing"
 import { userStore } from "@config/store"
-
-const fakeUser = {
-  id: 1,
-  name: "Pierre",
-  age: 22,
-  note: 5,
-  description:
-    "Je suis un véritable amoureux de la nature et des grands espaces. Mon châlet sympathique, perché au sommet des montagnes, est le fruit de mon amour pour les panoramas à couper le souffle et les moments de convivialité partagés. Je crois fermement que la beauté des paysages alpins doit être partagée et célébrée avec d'autres âmes festives.",
-  interests: ["Sport", "Musique", "Montagne"],
-}
 
 const occupe = [
   "Gobelets",
@@ -34,37 +25,37 @@ const occupe = [
 const occupetoi = ["Playlist", "Boissons", "Snacks"]
 
 function Page({ params }) {
-  const [housing, setHousing] = useState([])
-  const [isFetching, setIsFetching] = useState(true)
+  const [housing, setHousing] = useState(null)
+  const [owner, setOwner] = useState(null)
+  const [token, setToken] = useState(null)
   const { user } = userStore()
 
+  const { data, isFetching } = HousingHooks.useHousing({
+    id: params.id,
+    token,
+  })
+
   useEffect(() => {
-    async function call() {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/public/logement/${+params.id}`
-      )
-      const data = await response.json()
-      setHousing(data)
-      setIsFetching(false)
-    }
-    call()
+    setToken(localStorage.getItem("token"))
   }, [])
+
+  useEffect(() => {
+    if (data && !isFetching) {
+      console.log(data)
+      setHousing(data.housing)
+      setOwner(data.owner)
+    }
+  }, [data])
 
   return (
     <div className="flex flex-col text-lexend gap-8 text-black pb-10">
-      {isFetching ? (
-        <ClipLoader
-          className="self-center justify-self-center"
-          size={50}
-          color="#EE7526"
-        />
-      ) : (
+      {!isFetching && housing ? (
         <>
           <section className="header w-2/3 flex flex-col gap-2 px-20">
             <div className="flex items-center gap-20">
-              <h1 className="text-xl font-medium">{housing.titre}</h1>
+              <h1 className="text-xl font-medium">{housing.title}</h1>
               <div className="category-bg text-sm rounded-lg px-2 py-1 text-white">
-                {housing.style.name}
+                {housing.style}
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs">
@@ -86,17 +77,17 @@ function Page({ params }) {
                   height={16}
                   alt="logo emplacement"
                 />
-                <p className="text-sm">{housing.adresse}</p>
+                <p className="text-sm">{housing.address}</p>
               </div>
             </div>
           </section>
           <section className="photos grid grid-cols-4 grid-rows-7 gap-1 px-20">
-            {housing.imgLogements.map((image, index) => {
+            {housing.photos.split(",").map((image, index) => {
               return index < 1 ? (
                 <img
                   key={uid()}
                   style={{ height: "500px" }}
-                  src={"http://localhost:8000/symfony-images/" + image.filename}
+                  src={"http://127.0.0.1:3001/api/images/" + image}
                   alt="photo logement"
                   className="col-span-2 row-span-5 grid-image rounded-l-xl"
                 />
@@ -104,7 +95,7 @@ function Page({ params }) {
                 <img
                   key={uid()}
                   style={{ height: "300px" }}
-                  src={"http://localhost:8000/symfony-images/" + image.filename}
+                  src={"http://127.0.0.1:3001/api/images/" + image}
                   alt="photo logement"
                   className={
                     "col-span-1 row-span-2 w-full h-full " +
@@ -112,19 +103,24 @@ function Page({ params }) {
                   }
                 />
               ) : (
-                <div className="relative col-span-1 row-span-3 w-full h-full hover:cursor-pointer">
+                <div
+                  key={uid()}
+                  className="relative col-span-1 row-span-3 w-full h-full hover:cursor-pointer"
+                >
                   <img
-                    key={uid()}
                     style={{ height: "196px" }}
-                    src={
-                      "http://localhost:8000/symfony-images/" + image.filename
-                    }
+                    src={"http://127.0.0.1:3001/api/images/" + image}
                     alt="photo logement"
                     className={
                       " w-full h-full " +
                       (index == 4 ? "rounded-br-xl bg-white opacity-80" : "")
                     }
                   />
+                  {index == 4 && (
+                    <p className="absolute text-white text-4xl top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+                      + 8
+                    </p>
+                  )}
                   {/*{index == 4 && (*/}
                   {/*  <p className="absolute text-white text-4xl top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">*/}
                   {/*    + 8*/}
@@ -140,7 +136,7 @@ function Page({ params }) {
                 Présentation
               </h2>
               <p className="text-lg font-light">
-                {housing.description.split("\n\n").map((paragraph, index) => (
+                {housing?.description?.split("\n\n").map((paragraph, index) => (
                   <React.Fragment key={index}>
                     {paragraph}
                     <br />
@@ -158,8 +154,8 @@ function Page({ params }) {
               </h2>
               <Profile
                 isFetching={isFetching}
-                user={housing.User.Profile}
-                currentUser={user?.id}
+                user={owner}
+                currentUser={user?.id_user}
               />
             </div>
             <div className="w-1/3">
@@ -215,6 +211,12 @@ function Page({ params }) {
             <ListCarousel list={detailImageStyle} Card={DetailImageCard} />
           </section>
         </>
+      ) : (
+        <ClipLoader
+          className="self-center justify-self-center"
+          size={50}
+          color="#EE7526"
+        />
       )}
     </div>
   )

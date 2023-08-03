@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast"
 import { DateRangePicker } from "@node_modules/@wojtekmaj/react-daterange-picker"
 import { locationStore } from "@config/store"
 
-function Twelfth() {
+function Date() {
   const { userDates, setUserDates, setPage } = locationStore()
   const [dates, setDates] = useState(userDates)
 
@@ -54,4 +54,4 @@ function Twelfth() {
   )
 }
 
-export default Twelfth
+export default Date

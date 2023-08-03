@@ -2,16 +2,18 @@
 import Button from "@app/components/Button"
 import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
-import { categoryList } from "@utils/infos/category-list"
+import { styleList } from "@utils/infos/style-list"
 import { v4 as uid } from "uuid"
 import { locationStore } from "@config/store"
+import unidecode from "unidecode"
 
-function Third() {
-  const { setPage, userCategory, setUserCategory } = locationStore()
-  const [selectedCategory, setSelectedCategory] = useState(userCategory)
+function Style() {
+  const { setPage, userStyle, setUserStyle } = locationStore()
+  const [selectedStyle, setSelectedStyle] = useState(userStyle)
 
-  const updateCategory = (key) => {
-    setSelectedCategory(key)
+  const updateCategory = (title) => {
+    const style = unidecode(title).toLowerCase()
+    setSelectedStyle(style)
   }
 
   return (
@@ -28,24 +30,28 @@ function Third() {
         Quel type de logement sera à la disposition des invités ?
       </h4>
       <div className="flex flex-wrap items-center gap-6">
-        {categoryList.map((category) => (
+        {styleList.map((style) => (
           <div
             key={uid()}
-            onClick={() => updateCategory(category.title)}
+            onClick={() => updateCategory(style.title)}
             className={
               "min-w-[200px] py-2 text-center rounded-md hover:cursor-pointer hover:bg-[" +
-              category.color +
+              style.color +
               "] hover:text-white"
             }
             style={{
-              border: `2px solid ${category.color}`,
+              border: `2px solid ${style.color}`,
               backgroundColor:
-                selectedCategory === category.title ? category.color : "white",
+                selectedStyle === unidecode(style.title).toLocaleLowerCase()
+                  ? style.color
+                  : "white",
               color:
-                selectedCategory === category.title ? "white" : category.color,
+                selectedStyle === unidecode(style.title).toLocaleLowerCase()
+                  ? "white"
+                  : style.color,
             }}
           >
-            {category.title}
+            {style.title}
           </div>
         ))}
       </div>
@@ -59,8 +65,8 @@ function Third() {
           style="btn-orange-linear text-lg text-white font-medium px-10 py-2 rounded-md hover:cursor-pointer hover:opacity-90"
           text="Continuer"
           event={() => {
-            if (selectedCategory) {
-              setUserCategory(selectedCategory)
+            if (selectedStyle) {
+              setUserStyle(selectedStyle)
               setPage(4)
             } else {
               toast.error("Sélectionne une catégorie")
@@ -72,4 +78,4 @@ function Third() {
   )
 }
 
-export default Third
+export default Style

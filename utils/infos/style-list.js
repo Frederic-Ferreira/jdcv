@@ -1,4 +1,4 @@
-export const categoryList = [
+export const styleList = [
   {
     title: "Maison",
     color: "#00EDDE",

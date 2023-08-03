@@ -1,14 +1,15 @@
+import axios from "@config/axios"
 const HousingService = {}
 
 HousingService.getHousingList = function (params) {
-  return fetch("http://127.0.0.1:8000/api/public/logement/search", {
-    method: "POST",
-    body: JSON.stringify(params),
-  })
+  return axios.get("/housing", { headers: { Authorization: params.token } })
 }
 
-HousingService.getHousing = function (id) {
-  return fetch(`http://127.0.0.1:8000/api/public/logement/${id}`)
+HousingService.getHousing = function (params) {
+  return axios.get(`/housing/${params.id}`, {
+    params,
+    headers: { Authorization: params.token },
+  })
 }
 
 export default HousingService

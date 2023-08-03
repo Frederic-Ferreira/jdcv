@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import { locationStore } from "@config/store"
 
-function Fourth() {
+function Surface() {
   const { setPage, userChoice, setUserChoice, userCategory } = locationStore()
   const [choice, setChoice] = useState(userChoice)
 
@@ -79,4 +79,4 @@ function Fourth() {
   )
 }
 
-export default Fourth
+export default Surface

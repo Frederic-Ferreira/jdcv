@@ -2,7 +2,7 @@
 import Button from "@app/components/Button"
 import { locationStore } from "@config/store"
 
-function Second() {
+function Intro() {
   const { setPage } = locationStore()
 
   return (
@@ -52,4 +52,4 @@ function Second() {
   )
 }
 
-export default Second
+export default Intro

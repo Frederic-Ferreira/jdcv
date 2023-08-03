@@ -3,10 +3,10 @@ import React from "react"
 import Button from "@app/components/Button"
 import CustomLink from "@app/components/Link"
 import Lottie from "@node_modules/lottie-react"
-import firstLocation from "@public/animations/first-location.json"
+import firstLocation from "@public/animations/home-create-housing.json"
 import { locationStore } from "@config/store"
 
-function First() {
+function Home() {
   const { setPage } = locationStore()
   return (
     <div className="flex gap-8 pt-40 px-40 pb-20">
@@ -36,4 +36,4 @@ function First() {
   )
 }
 
-export default First
+export default Home

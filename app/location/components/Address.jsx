@@ -18,11 +18,11 @@ export default function Address({ onSelect, location }) {
         const data = await response.json()
         setSuggestions(
           data?.features?.map((feature) => ({
-            title: feature.properties.label,
-            address: feature.properties.city,
+            address: feature.properties.label,
+            post_code: +feature.properties.postcode,
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],
-            cp: feature.properties.citycode,
+            context: feature.properties.context,
             id: feature.properties.id,
           }))
         )
@@ -35,9 +35,9 @@ export default function Address({ onSelect, location }) {
   }
 
   const handleLocationSelect = (suggestion) => {
-    const { title } = suggestion
+    const { address } = suggestion
     onSelect(suggestion)
-    setPlace(title)
+    setPlace(address)
     setSuggestions([])
     setSearch("")
   }
@@ -71,7 +71,7 @@ export default function Address({ onSelect, location }) {
                   <EnvironmentOutlined
                     style={{ color: "#E4696D", fontSize: 20 }}
                   />
-                  <p className="text-gray-700">{suggestion.title}</p>
+                  <p className="text-gray-700">{suggestion.address}</p>
                 </div>
               </div>
             ))

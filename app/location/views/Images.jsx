@@ -7,8 +7,9 @@ import Image from "next/image"
 import { CloseCircleOutlined } from "@ant-design/icons"
 import { locationStore } from "@config/store"
 
-function Eighth() {
-  const { setPage, setUserImages, userImages } = locationStore()
+function Images() {
+  const { setPage, setUserImages, userImages, setUserMainImage } =
+    locationStore()
   const input = useRef(null)
   const [images, setImages] = useState(userImages)
 
@@ -145,7 +146,15 @@ function Eighth() {
           text="Continuer"
           event={() => {
             if (images.length >= 1) {
-              setUserImages(images)
+              const imagesData = images.map((image) =>
+                image.data
+                  .replace(/^data:image\/png;base64,/, "")
+                  .replace(/^data:image\/jpg;base64,/, "")
+                  .replace(/^data:image\/jpeg;base64,/, "")
+                  .replace(/^data:image\/gif;base64,/, "")
+              )
+              setUserImages(imagesData.join("\n\n"))
+              setUserMainImage(images[0])
               setPage(9)
             } else {
               toast.error("Sélectionne au moins 5 photos")
@@ -157,4 +166,4 @@ function Eighth() {
   )
 }
 
-export default Eighth
+export default Images

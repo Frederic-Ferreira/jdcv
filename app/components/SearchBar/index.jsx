@@ -1,11 +1,11 @@
 "use client"
-import Places from "@app/components/SearchBar/Places"
-import Dates from "@app/components/SearchBar/Dates"
-import People from "@app/components/SearchBar/People"
+import Places from "@app/components/SearchBar/components/Places"
+import Dates from "@app/components/SearchBar/components/Dates"
+import People from "@app/components/SearchBar/components/People"
 import Button from "@app/components/Button"
 import Modal from "@app/components/Modal"
 import { useEffect, useState, useRef } from "react"
-import Events from "@app/components/SearchBar/Events"
+import Events from "@app/components/SearchBar/components/Events"
 import moment from "moment"
 
 const SearchBar = ({ barWidth, event }) => {
@@ -17,8 +17,8 @@ const SearchBar = ({ barWidth, event }) => {
 
   const searchBarRef = useRef(null)
 
-  const handleOpenModal = () => {
-    if (!showModal) {
+  const handleOpenModal = (e) => {
+    if (!showModal && !e.target.classList.contains("search-btn")) {
       setShowModal(true)
       searchBarRef.current.scrollIntoView({
         behavior: "smooth",
@@ -69,7 +69,7 @@ const SearchBar = ({ barWidth, event }) => {
         <People handleSelect={setPeople} />
         <Events handleSelect={setEvents} />
         <Button
-          style="flex items-center justify-center text-sm rounded-lg bg-black py-2 px-4 text-white hover:bg-opacity-80 col-span-1 truncate hover:cursor-pointer"
+          style="search-btn flex items-center justify-center text-sm rounded-lg bg-black py-2 px-4 text-white hover:bg-opacity-80 col-span-1 truncate hover:cursor-pointer"
           text="Rechercher"
           event={() => {
             handleCloseModal()

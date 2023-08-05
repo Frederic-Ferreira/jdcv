@@ -18,6 +18,24 @@ export const userStore = create(
   )
 )
 
+export const searchStore = create((set) => ({
+  placeSearch: null,
+  peopleSearch: 0,
+  eventSearch: [],
+  dateSearch: [],
+  setPeopleSearch: (peopleSearch) => set(() => ({ peopleSearch })),
+  setPlaceSearch: (placeSearch) => set(() => ({ placeSearch })),
+  setEventSearch: (eventSearch) => set(() => ({ eventSearch })),
+  setDateSearch: (dateSearch) => set(() => ({ dateSearch })),
+  reset: () =>
+    set(() => ({
+      peopleSearch: null,
+      postCodeSearch: null,
+      eventSearch: null,
+      dateSearch: null,
+    })),
+}))
+
 export const locationStore = create((set) => ({
   userStyle: null,
   location: null,

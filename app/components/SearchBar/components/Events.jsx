@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { useEffect, useState, useRef } from "react"
 import { v4 as uid } from "uuid"
+import { searchStore } from "@config/store"
 
 const listEvents = [
   { title: "Mariage", selected: false },
@@ -14,10 +15,23 @@ const listEvents = [
 ]
 
 function Events({ handleSelect }) {
-  const [events, setEvents] = useState([])
+  const { eventSearch, setEventSearch } = searchStore()
+  const [events, setEvents] = useState(eventSearch)
   const [eventsList, setEventsList] = useState(listEvents)
   const [showSearchMenu, setShowSearchMenu] = useState(false)
   const menuRef = useRef(null)
+
+  useEffect(() => {
+    setEventsList(
+      listEvents.map((e) => {
+        if (events.includes(e.title)) {
+          return { ...e, selected: true }
+        } else {
+          return e
+        }
+      })
+    )
+  }, [])
 
   const handleShowMenu = () => {
     setShowSearchMenu(true)
@@ -30,6 +44,7 @@ function Events({ handleSelect }) {
   const handleSelectEvent = (event) => {
     if (events.includes(event.title)) {
       setEvents(events.filter((e) => e !== event.title))
+      setEventSearch(events.filter((e) => e !== event.title))
       const newEvents = eventsList.map((e) => {
         if (e.title === event.title) {
           return { ...e, selected: false }
@@ -50,6 +65,7 @@ function Events({ handleSelect }) {
         })
       )
       setEvents([...events, event.title])
+      setEventSearch([...events, event.title])
       handleSelect([...events, event.title])
     }
   }

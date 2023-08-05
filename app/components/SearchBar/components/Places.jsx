@@ -2,9 +2,11 @@
 import Image from "next/image"
 import { EnvironmentOutlined, SearchOutlined } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
+import { searchStore } from "@config/store"
 
 function Places({ handleSelect }) {
-  const [place, setPlace] = useState(null)
+  const { placeSearch, setPlaceSearch } = searchStore()
+  const [place, setPlace] = useState(placeSearch)
   const [search, setSearch] = useState("")
   const [suggestions, setSuggestions] = useState([])
   const [showSearchMenu, setShowSearchMenu] = useState(false)
@@ -49,6 +51,11 @@ function Places({ handleSelect }) {
   const handleLocationSelect = (suggestion) => {
     const { latitude, longitude, title, post_code } = suggestion
     setPlace({
+      title,
+      latitude,
+      longitude,
+    })
+    setPlaceSearch({
       title,
       latitude,
       longitude,

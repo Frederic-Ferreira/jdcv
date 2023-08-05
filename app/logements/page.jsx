@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { Pagination } from "@mui/material"
 import dynamic from "next/dynamic"
-import SearchBar from "@app/components/SearchBar/SearchBar"
+import SearchBar from "@app/components/SearchBar"
 import FilterOrder from "@app/logements/components/FilterOrder"
 import FilterTag from "@app/logements/components/FilterTag"
 import HousingCard from "@app/logements/components/HousingCard"
@@ -12,6 +12,7 @@ import { useState, useEffect } from "react"
 import HousingHooks from "@app/hooks/Housing"
 import { ClipLoader } from "@node_modules/react-spinners"
 import { useRouter } from "next/navigation"
+import unidecode from "unidecode"
 
 const Map = dynamic(() => import("@app/logements/components/Map"), {
   ssr: false,
@@ -26,6 +27,8 @@ function Housing({ searchParams }) {
   const [page, setPage] = useState(1)
   const router = useRouter()
 
+  const { data, isFetching } = HousingHooks.useHousingList(token, page, params)
+
   useEffect(() => {
     setToken(localStorage.getItem("token"))
   }, [])
@@ -33,12 +36,6 @@ function Housing({ searchParams }) {
   useEffect(() => {
     setParams(searchParams)
   }, [searchParams])
-
-  const { data, isFetching } = HousingHooks.useHousingList({
-    page: page,
-    token,
-    ...params,
-  })
 
   useEffect(() => {
     if (!isFetching) {
@@ -64,21 +61,24 @@ function Housing({ searchParams }) {
 
   function handleSearch(args) {
     let string = ""
-    const { nbPersonne, event, startDate, endDate, departement } = args
-    if (nbPersonne) {
-      string += `nbPersonne=${Number(nbPersonne)}&`
+    const { nb_people, events, start_date, end_date, post_code } = args
+    console.log(events)
+    if (nb_people) {
+      string += `${string !== "" ? "&" : ""}nb_people=${Number(nb_people)}`
     }
-    if (departement) {
-      string += `departement=${Number(departement)}&`
+    if (post_code) {
+      string += `${string !== "" ? "&" : ""}post_code=${Number(post_code)}`
     }
-    if (event) {
-      string += `event=${event[0]}&`
+    if (events) {
+      string += `${string !== "" ? "&" : ""}events=${unidecode(
+        events.join(",").toLowerCase()
+      )}`
     }
-    if (startDate) {
-      string += `startDate=${startDate}&`
+    if (start_date) {
+      string += `${string !== "" ? "&" : ""}start_date=${start_date}`
     }
-    if (endDate) {
-      string += `endDate=${endDate}`
+    if (end_date) {
+      string += `${string !== "" ? "&" : ""}end_date=${end_date}`
     }
     router.push(`/logements?${string}`)
   }

@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
 import CustomLink from "@app/components/Link"
-import SearchBar from "@app/components/SearchBar/SearchBar"
+import SearchBar from "@app/components/SearchBar"
 import InfoCard from "@app/components/InfoCard"
 import Gems from "@app/components/Gems/Gems"
 import { infoCards } from "@utils/infos/info-cards"
@@ -54,19 +54,21 @@ export default function Home() {
     let string = ""
     const { nb_people, events, start_date, end_date, post_code } = args
     if (nb_people) {
-      string += `nb_people=${Number(nb_people)}&`
+      string += `${string !== "" ? "&" : ""}nb_people=${Number(nb_people)}`
     }
     if (post_code) {
-      string += `post_code=${Number(post_code)}&`
+      string += `${string !== "" ? "&" : ""}post_code=${Number(post_code)}`
     }
     if (events) {
-      string += `events=${unidecode(events.join(",").toLowerCase())}&`
+      string += `${string !== "" ? "&" : ""}events=${unidecode(
+        events.join(",").toLowerCase()
+      )}`
     }
     if (start_date) {
-      string += `start_date=${start_date}&`
+      string += `${string !== "" ? "&" : ""}start_date=${start_date}`
     }
     if (end_date) {
-      string += `end_date=${end_date}`
+      string += `${string !== "" ? "&" : ""}end_date=${end_date}`
     }
     router.push(`/logements?${string}`)
   }

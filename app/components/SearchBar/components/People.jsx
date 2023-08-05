@@ -6,9 +6,11 @@ import {
   TeamOutlined,
 } from "@ant-design/icons"
 import { useEffect, useState, useRef } from "react"
+import { searchStore } from "@config/store"
 
 function People({ handleSelect }) {
-  const [people, setPeople] = useState(0)
+  const { peopleSearch, setPeopleSearch } = searchStore()
+  const [people, setPeople] = useState(peopleSearch)
   const [showSearchMenu, setShowSearchMenu] = useState(false)
   const menuRef = useRef(null)
 
@@ -73,8 +75,9 @@ function People({ handleSelect }) {
               <div className="flex items-center gap-4">
                 <MinusCircleOutlined
                   onClick={() => {
-                    people !== 0 && setPeople(people - 1)
                     if (people !== 0) {
+                      setPeople(people - 1)
+                      setPeopleSearch(people - 1)
                       handleSelect(people - 1)
                     } else {
                       handleSelect(0)
@@ -86,6 +89,7 @@ function People({ handleSelect }) {
                 <PlusCircleOutlined
                   onClick={() => {
                     setPeople(people + 1)
+                    setPeopleSearch(people + 1)
                     handleSelect(people + 1)
                   }}
                 />

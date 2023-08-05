@@ -1,12 +1,15 @@
 import HousingService from "@app/services/Housing"
 import { useQuery } from "react-query"
 
-const useHousingList = (params) => {
+const useHousingList = (token, page, queryParams) => {
   return useQuery(
-    ["housingList", params],
+    ["housingList", token, page, queryParams],
     async () => {
-      if (params.token) {
-        const response = await HousingService.getHousingList(params)
+      if (token) {
+        const response = await HousingService.getHousingList(token, {
+          page,
+          ...queryParams,
+        })
         return response.data
       }
     },

@@ -3,9 +3,11 @@ import Image from "next/image"
 import { useEffect, useState, useRef } from "react"
 import { DateRangePicker } from "@wojtekmaj/react-daterange-picker"
 import moment from "moment"
+import { searchStore } from "@config/store"
 
 function Dates({ handleSelect }) {
-  const [dates, setDates] = useState([])
+  const { dateSearch, setDateSearch } = searchStore()
+  const [dates, setDates] = useState(dateSearch)
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef(null)
 
@@ -19,6 +21,7 @@ function Dates({ handleSelect }) {
 
   const handleDateChange = (newDates) => {
     setDates(newDates)
+    setDateSearch(newDates)
     handleSelect(newDates)
     handleHideMenu()
   }

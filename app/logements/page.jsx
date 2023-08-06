@@ -38,11 +38,11 @@ function Housing({ searchParams }) {
   }, [searchParams])
 
   useEffect(() => {
-    if (!isFetching) {
+    if (data && !isFetching) {
       setHousings(data?.housingList)
       setTotalPages(data?.total)
     }
-  }, [data])
+  }, [data, isFetching])
 
   const updateFilters = (key) => {
     if (queryFilters.includes(key)) {

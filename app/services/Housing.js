@@ -11,11 +11,8 @@ HousingService.getHousingList = function (token, params) {
   return axios.get("/housing", config)
 }
 
-HousingService.getHousing = function (params) {
-  return axios.get(`/housing/${params.id}`, {
-    params,
-    headers: { Authorization: params.token },
-  })
+HousingService.getHousing = function (id) {
+  return axios.get(`/housing/${id}`)
 }
 
 export default HousingService

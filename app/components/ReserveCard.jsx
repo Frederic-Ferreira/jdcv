@@ -8,7 +8,6 @@ import {
 } from "@node_modules/@ant-design/icons"
 import { DateRangePicker } from "@node_modules/@wojtekmaj/react-daterange-picker"
 import Image from "@node_modules/next/image"
-import CustomLink from "@app/components/Link"
 import Link from "next/link"
 
 function ReserveCard({
@@ -18,14 +17,31 @@ function ReserveCard({
   peopleParams,
   eventPeople,
   eventDates,
+  eventPrice,
 }) {
   const [people, setPeople] = useState(+peopleParams || 0)
   const [showPeopleMenu, setShowPeopleMenu] = useState(false)
   const [dates, setDates] = useState(datesParams || [])
   const [showDateMenu, setShowDateMenu] = useState(false)
   const [numberOfDays, setNumberOfDays] = useState(0)
+  const [total, setTotal] = useState(0)
   const dateMenuRef = useRef(null)
   const peopleMenuRef = useRef(null)
+
+  useEffect(() => {
+    const days = moment(dates[1]).diff(moment(dates[0]), "days")
+    setTotal(
+      dates.length > 0 && days === 0
+        ? housing.price * 1 +
+            Math.round(housing.price * 1 * 0.14) +
+            Math.round(housing.price * 1 * 0.14 * 0.2)
+        : dates.length > 0 && days > 0
+        ? housing.price * days +
+          Math.round(housing.price * days * 0.14) +
+          Math.round(housing.price * days * 0.14 * 0.2)
+        : 0
+    )
+  }, [])
 
   const handleShowPeopleMenu = () => {
     setShowPeopleMenu(true)
@@ -47,6 +63,18 @@ function ReserveCard({
     setDates(newDates)
     const days = moment(newDates[1]).diff(moment(newDates[0]), "days")
     setNumberOfDays(days)
+    const totalPrice =
+      newDates.length > 0 && days === 0
+        ? housing.price * 1 +
+          Math.round(housing.price * 1 * 0.14) +
+          Math.round(housing.price * 1 * 0.14 * 0.2)
+        : newDates.length > 0 && days > 0
+        ? housing.price * days +
+          Math.round(housing.price * days * 0.14) +
+          Math.round(housing.price * days * 0.14 * 0.2)
+        : 0
+    setTotal(totalPrice)
+    eventPrice && eventPrice(totalPrice * 100)
     eventDates && eventDates(newDates)
     handleHideDateMenu()
   }
@@ -181,9 +209,7 @@ function ReserveCard({
       </div>
       <div className="flex gap-2 h-[100px] -mt-4 rounded-lg bg-white overflow-hidden">
         <img
-          src={`http://127.0.0.1:3001/api/images/${
-            housing.photos.split(",")[0]
-          }`}
+          src={`http://127.0.0.1:3001/api/images/${housing.photos[0]}`}
           width="33%"
           height="100%"
           alt="photo logement"
@@ -237,25 +263,14 @@ function ReserveCard({
       </div>
       <div className="flex items-center justify-between text-lg font-bold">
         <p>Total</p>
-        <p>
-          {dates.length > 0 && numberOfDays === 0
-            ? housing.price * 1 +
-              Math.round(housing.price * 1 * 0.14) +
-              Math.round(housing.price * 1 * 0.14 * 0.2)
-            : dates.length > 0 && numberOfDays > 0
-            ? housing.price * numberOfDays +
-              Math.round(housing.price * numberOfDays * 0.14) +
-              Math.round(housing.price * numberOfDays * 0.14 * 0.2)
-            : 0}
-          €
-        </p>
+        <p>{total}€</p>
       </div>
       {!style && (
         <Link
           href={{
             pathname: "/reservation",
             query: {
-              id: housing.id,
+              id: housing.id_housing,
               dates:
                 dates.length > 0
                   ? [

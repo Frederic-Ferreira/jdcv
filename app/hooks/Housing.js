@@ -17,14 +17,12 @@ const useHousingList = (token, page, queryParams) => {
   )
 }
 
-const useHousing = (params) => {
+const useHousing = (id) => {
   return useQuery(
-    ["housing", params],
+    ["housing", id],
     async () => {
-      if (params.token) {
-        const response = await HousingService.getHousing(params)
-        return response.data
-      }
+      const response = await HousingService.getHousing(id)
+      return response.data
     },
     { refetchOnWindowFocus: false, cacheTime: 100000, retry: true }
   )

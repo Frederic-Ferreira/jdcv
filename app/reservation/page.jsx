@@ -1,5 +1,5 @@
 "use client"
-
+import { LoadingOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Button from "@app/components/Button"
@@ -9,17 +9,30 @@ import moment from "moment"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { userStore } from "@config/store"
+import HousingHooks from "@app/hooks/Housing"
+import ReservationService from "@app/services/Reservation"
 
 function Page({ searchParams }) {
-  const [cardNumber, setCardNumber] = useState("")
-  const [housing, setHousing] = useState([])
-  const [isFetching, setIsFetching] = useState(true)
-  const [crypto, setCrypto] = useState("")
-  const [date, setDate] = useState("")
+  const [housing, setHousing] = useState(null)
+  const [token, setToken] = useState(null)
   const [dates, setDates] = useState(searchParams.dates || [])
   const [people, setPeople] = useState(searchParams.people || 0)
+  const [price, setPrice] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { user } = userStore()
+
+  const { data, isFetching } = HousingHooks.useHousing(searchParams.id)
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"))
+  }, [])
+
+  useEffect(() => {
+    if (data && !isFetching) {
+      setHousing(data.housing)
+    }
+  }, [data, isFetching])
 
   useEffect(() => {
     if (!user) {
@@ -30,28 +43,34 @@ function Page({ searchParams }) {
     }
   }, [user])
 
-  const handleReservation = () => {
-    if (!cardNumber || !crypto || !date) {
+  const handleReservation = async () => {
+    if (people == 0 || dates.length < 2) {
       toast.error("Veuillez remplir tous les champs")
     } else {
-      toast.success("Votre réservation a bien été prise en compte")
-      setTimeout(() => {
-        router.push("/")
-      }, 1000)
+      setIsLoading(true)
+      const reservation = await ReservationService.createReservation(token, {
+        id_housing: +searchParams.id,
+        start_date: moment(dates[0]).format("YYYY-MM-DD"),
+        end_date: moment(dates[1]).format("YYYY-MM-DD"),
+      })
+
+      if (reservation.status === 200) {
+        const stripe = await ReservationService.getStripeSession(
+          token,
+          {
+            id_housing: housing.id_housing,
+            items: [{ id: housing.id_housing, price }],
+          },
+          reservation.data.reservation.id_reservation
+        )
+        if (stripe.status === 200) {
+          localStorage.setItem("price", price)
+          setIsLoading(false)
+          router.push(stripe.data.url)
+        }
+      }
     }
   }
-
-  useEffect(() => {
-    async function call() {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/public/logement/${+searchParams.id}`
-      )
-      const data = await response.json()
-      setHousing(data)
-      setIsFetching(false)
-    }
-    call()
-  }, [])
 
   return (
     <div className="flex justify-between px-40 py-20">
@@ -63,7 +82,7 @@ function Page({ searchParams }) {
           <h2 className="text-2xl font-medium">Récapitulatif de la soirée :</h2>
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-medium">Date :</h3>
-            <p>
+            <p className="underline">
               {dates.length
                 ? `Du ${moment(dates[0]).format("DD/MM/YYYY")} au
             ${moment(dates[1]).format("DD/MM/YYYY")}`
@@ -72,7 +91,7 @@ function Page({ searchParams }) {
           </div>
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-medium">Nombre d'invités :</h3>
-            <p>
+            <p className="underline">
               {people > 0
                 ? `${people} fêtard(e)${people > 1 ? "s" : ""} ser${
                     people > 1 ? "ont" : "a"
@@ -81,44 +100,10 @@ function Page({ searchParams }) {
             </p>
           </div>
         </div>
-        <div className="flex flex-col">
-          <h2 className="text-2xl font-medium mb-4">Paiement</h2>
-          <input
-            className="border border-1 border-[#DDDDDD] p-4 rounded-t-lg"
-            type="password"
-            placeholder="Numéro de carte"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
-          />
-          <div className="flex items-center border border-1 border-[#DDDDDD] rounded-b-lg overflow-hidden">
-            <input
-              className="border-r border-1 border-[#DDDDDD] rounded-bl-lg p-4 w-1/2"
-              type="text"
-              placeholder="Date d'expiration"
-              value={date}
-              onChange={(e) => {
-                if (date.length === 1 || date.length === 4) {
-                  setDate(e.target.value + "/")
-                } else {
-                  setDate(e.target.value)
-                }
-              }}
-            />
-            <input
-              className="rounded-br-lg p-4 w-1/2"
-              type="password"
-              placeholder="Cryptogramme"
-              value={crypto}
-              onChange={(e) => setCrypto(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center"></div>
-        </div>
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-medium">Conditions d'annulation</h2>
-          <p>
-            Annulation gratuite pendant 48 heures. Si tu annules avant le 24
-            juin, tu auras droit à un remboursement partiel.
+          <p className="text-[#FF771E]">
+            Annulation gratuite pendant 48 heures.
           </p>
         </div>
         <div className="flex flex-col gap-4">
@@ -151,34 +136,30 @@ function Page({ searchParams }) {
             <p>Traite le logement de ton hôte comme si c'était le tiens.</p>
           </div>
         </div>
-        <div className="text-sm">
-          En cliquant sur le bouton ci-dessous, j'accepte les conditions
-          suivantes : Règlement intérieur de l'hôte, Règles de base pour les
-          voyageurs, Politique J'irais Danser Chez Vous de remplacement
-          d'hébergement et de remboursement et je donne mon accord pour que JDCV
-          débite mon mode de paiement si je suis responsable de dommages.
-        </div>
-        <Button
-          event={handleReservation}
-          text="Confirmer et payer"
-          style="px-6 py-2 mx-20 text-center rounded-lg text-white category-bg hover:opacity-90 hover:cursor-pointer"
-        />
       </div>
-      {isFetching ? (
+      {!housing ? (
         <ClipLoader
           className="relative top-30 right-20"
           size={50}
           color="#EE7526"
         />
       ) : (
-        <ReserveCard
-          eventPeople={setPeople}
-          eventDates={setDates}
-          datesParams={searchParams.dates}
-          peopleParams={searchParams.people}
-          style={{ height: "450px", width: "400px" }}
-          housing={housing}
-        />
+        <div className="flex flex-col gap-8">
+          <ReserveCard
+            eventPeople={setPeople}
+            eventDates={setDates}
+            eventPrice={setPrice}
+            datesParams={searchParams.dates}
+            peopleParams={searchParams.people}
+            style={{ height: "450px", width: "400px" }}
+            housing={housing}
+          />
+          <Button
+            event={handleReservation}
+            text={isLoading ? <LoadingOutlined /> : "Confirmer et payer"}
+            style="px-10 py-2 text-center rounded-lg text-white category-bg hover:opacity-90 hover:cursor-pointer"
+          />
+        </div>
       )}
     </div>
   )

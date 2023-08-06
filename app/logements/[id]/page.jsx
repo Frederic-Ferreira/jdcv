@@ -27,25 +27,16 @@ const occupetoi = ["Playlist", "Boissons", "Snacks"]
 function Page({ params }) {
   const [housing, setHousing] = useState(null)
   const [owner, setOwner] = useState(null)
-  const [token, setToken] = useState(null)
   const { user } = userStore()
 
-  const { data, isFetching } = HousingHooks.useHousing({
-    id: params.id,
-    token,
-  })
-
-  useEffect(() => {
-    setToken(localStorage.getItem("token"))
-  }, [])
+  const { data, isFetching } = HousingHooks.useHousing(params.id)
 
   useEffect(() => {
     if (data && !isFetching) {
-      console.log(data)
       setHousing(data.housing)
       setOwner(data.owner)
     }
-  }, [data])
+  }, [data, isFetching])
 
   return (
     <div className="flex flex-col text-lexend gap-8 text-black pb-10">
@@ -82,7 +73,7 @@ function Page({ params }) {
             </div>
           </section>
           <section className="photos grid grid-cols-4 grid-rows-7 gap-1 px-20">
-            {housing.photos.split(",").map((image, index) => {
+            {housing.photos.map((image, index) => {
               return index < 1 ? (
                 <img
                   key={uid()}

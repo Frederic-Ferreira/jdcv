@@ -18,7 +18,7 @@ function HousingCard({
 }) {
   return (
     <div className="housing-card flex grid-cols-7 gap-4 h-full w-full">
-      <ImagesCarousel images={photos.split(",")} />
+      <ImagesCarousel images={photos} />
       <div className="flex flex-col col-span-4 gap-6 font-light text-black">
         <Link key={uid()} href={"/logements/" + id_housing}>
           <div className="mb-3 label w-1/2 text-center text-sm text-white bg-[#E2209E] rounded-[7px] px-6 py-1 opacity-70">
